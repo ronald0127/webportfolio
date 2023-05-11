@@ -1,0 +1,32 @@
+.text-justify {
+  text-align: justify;
+}
+
+.custom-size-1 {
+  height: 450px;
+  width: 500px;
+}
+
+.custom-height-1 {
+  height: 300px;
+}
+
+.bg-img-1 {
+  background-image: url(./images/grey.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: auto;
+  height: auto;
+}
+
+.bg-img-2 {
+  background-image: url(./images/contact-bg.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  width: auto;
+  height: auto;
+}
+
+.carousel-control-next, .carousel-control-prev {
+  filter: invert(100%);  
+}
