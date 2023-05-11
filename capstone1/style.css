@@ -7,8 +7,17 @@
   width: 500px;
 }
 
+.custom-size-2 {
+  height: 40px;
+  width: 40px;
+}
+
 .custom-height-1 {
   height: 300px;
+}
+
+.custom-width-1 {
+  width: 99%;
 }
 
 .bg-img-1 {
@@ -29,4 +38,12 @@
 
 .carousel-control-next, .carousel-control-prev {
   filter: invert(100%);  
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.footer-color {
+  background-color: #006400;
 }

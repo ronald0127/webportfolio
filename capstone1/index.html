@@ -5,6 +5,9 @@
     <!-- Mobile Responsive Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- AJAX -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <!-- Bootstrap Link -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous"/>
 
@@ -17,28 +20,31 @@
 <body>
 
     <!-- Navbar Section Start -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a class="navbar-brand" href="#">Ronald</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">About Me<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Projects</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Tools</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+    <div class="mb-5 pb-2">
+        <nav class="navbar navbar-expand-lg navbar-light bg-primary fixed-top">
+            <img src="./images/icon.png" class="img-fluid rounded-circle custom-size-2 m-1">
+            <a class="navbar-brand" href="#top">Ronald</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#top">About Me<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#myProjects">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#toolsAndSkills">Tools</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contactMe">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
     <!-- Navbar Section End -->
 
     <!-- Main Content Section Start -->
@@ -48,7 +54,7 @@
         <div class="row">
 
             <!-- Side Navbar Section Start -->
-            <div class="card col-xl-1 d-none d-xl-block p-0 bg-dark">
+            <div class="card col-xl-1 d-none d-xl-block p-0 bg-dark mt-3">
                 <div class="accordion" id="accordionExample">
 
                     <!-- Services Section Start-->
@@ -125,7 +131,7 @@
                 <!-- Profile Section Start -->
                 <div class="container-fluid text-light min-vh-100 p-3 p-md-5 bg-img-1">
 
-                    <img class="mt-5 mt-md-0 rounded-circle custom-size-1 border border-primary border-5 img-fluid d-none d-md-block mx-auto" src="./images/me.jpg">
+                    <img class="mt-5 mt-md-0 rounded-circle custom-size-1 border border-primary border-5 img-fluid d-none d-md-block mx-auto" src="./images/me.jpg"/>
 
                     <h1 class="fw-bolder text-decoration-underline link-underline-primary pt-3">Ronald Repollo</h1>
                     <h3 class="fw-bolder text-warning">Full-Stack Web Developer</h3>
@@ -140,7 +146,7 @@
                     </div>
 
                     <!-- Carousel Section Start -->
-                    <div class="row d-none d-md-block mt-md-5 bg-dark">
+                    <div class="row d-none d-md-block mt-md-5 bg-dark" id="myProjects">
                         <h2 class="my-3 pt-3">My Projects</h2>
                         <div class="offset-xl-3 col-xl-6">
                             <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
@@ -150,7 +156,7 @@
                                     <div class="carousel-item active mw-100">
                                         <div class="d-flex flex-column">
                                             <img src="https://getbootstrap.com/docs/4.0/examples/screenshots/album.png" class="d-block w-100" alt="1st Project">
-                                            <div class="d-none d-md-block pt-2">
+                                            <div class="d-none d-md-block pt-2 pb-2">
                                                 <h5>My First Project</h5>
                                                 <p>A simple project made from HTML.</p>
                                             </div>    
@@ -160,7 +166,7 @@
                                     <div class="carousel-item">
                                         <div class="d-flex flex-column">
                                             <img src="https://getbootstrap.com/docs/4.0/examples/screenshots/jumbotron.png" class="d-block w-100" alt="2nd Project">
-                                            <div class="d-none d-md-block pt-2">
+                                            <div class="d-none d-md-block pt-2 pb-2">
                                                 <h5>My Second Project</h5>
                                                 <p>A simple project made from CSS.</p>
                                             </div>
@@ -170,7 +176,7 @@
                                     <div class="carousel-item">
                                         <div class="d-flex flex-column">
                                             <img src="https://getbootstrap.com/docs/4.0/examples/screenshots/carousel.png" class="d-block w-100" alt="3rd Project">
-                                            <div class="d-none d-md-block pt-2">
+                                            <div class="d-none d-md-block pt-2 pb-2">
                                                 <h5>My Third Project</h5>
                                                 <p>A simple project made from Bootstrap.</p>
                                             </div>
@@ -197,7 +203,7 @@
 
 
                 <!-- Skills and Tools Start -->
-                <div class="bg-dark text-light min-vh-100 p-5 bg-img-1">
+                <div class="bg-dark text-light min-vh-100 p-5 bg-img-1" id="toolsAndSkills">
 
                     <h2 class="mb-3">Skills and Tools</h2>
 
@@ -210,8 +216,8 @@
                                 <img src="https://3.bp.blogspot.com/-7x5c_f1yzsQ/XHv9FZKHrEI/AAAAAAAADrE/4iGl9Lm6K2odX4SdWbU_RN6gZesx4IaGACEwYBhgL/s1600/html.jpg" class="card-img-top" alt="HTML image">
                                 <h5 class="card-title mt-3">HTML</h5>
                                 <h6 class="card-subtitle text-muted mb-2">Programming Basics</h6>
-                                <p class="card-text text-justify mx-auto">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <p class="card-text">
+                                    Proficiency in Coding and Debugging skills in HTML. As well as to apply backend script.
                                 </p>
                                 <!-- <a href="#" class="card-link">Link To Project</a> -->
                             </div>
@@ -225,7 +231,7 @@
                                 <h5 class="card-title mt-3">Bootstrap</h5>
                                 <h6 class="card-subtitle text-muted mb-2">Rapid Prototyping</h6>
                                 <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    Familiarization in using BootStrap document and how to apply it in HTML code. As well as to modify it in CSS.
                                 </p>
                                 <!-- <a href="#" class="card-link">Link To Project</a> -->
                             </div>
@@ -239,7 +245,7 @@
                                 <h5 class="card-title mt-3">Node JS Server</h5>
                                 <h6 class="card-subtitle text-muted mb-2">Backend Basics</h6>
                                 <p class="card-text">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                    Javascript coding and debugging as well as proficiency in using NodeJS server.
                                 </p>
                                 <!-- <a href="#" class="card-link">Link To Project</a> -->
                             </div>
@@ -257,9 +263,9 @@
                             <div class="card-body">
                                 <img src="./images/java.png" class="card-img-top custom-height-1" alt="Java image">
                                 <h5 class="card-title mt-3">Java</h5>
-                                <h6 class="card-subtitle text-muted mb-2">Programming and Debugging</h6>
-                                <p class="card-text text-justify mx-auto">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <h6 class="card-subtitle text-muted mb-2">JAVA SE and J2EE</h6>
+                                <p class="card-text">
+                                    Advance programming and debugging as well as used of other API's. Also able to apply Object Oriented Programming in Java to create code that follows the proper architecture.
                                 </p>
                                 <!-- <a href="#" class="card-link">Link To Project</a> -->
                             </div>
@@ -272,8 +278,8 @@
                                 <img src="./images/mysql-php.jpg" class="card-img-top" alt="MySQL image">
                                 <h5 class="card-title mt-3">MySQL</h5>
                                 <h6 class="card-subtitle text-muted mb-2">Database Creation and Query</h6>
-                                <p class="card-text text-justify mx-auto">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                                <p class="card-text">
+                                    Able to create and relate databases and also able to create query and tables. Capable of creating script in SQL.
                                 </p>
                                 <!-- <a href="#" class="card-link">Link To Project</a> -->
                             </div>
@@ -289,7 +295,7 @@
                 <!-- Side Content Section End -->
 
                 <!-- Contact Form Start -->
-                <div class="row bg-dark text-light text-center d-none d-md-block m-0 py-5 bg-img-2">
+                <div class="row bg-dark text-light text-center d-none d-md-block m-0 py-5 bg-img-2" id="contactMe">
                     <h2 class="pt-3">Contact Me</h2>
                     <div class="col-12 col-md-8 offset-md-2 col-xl-4 offset-xl-4 border border-5 border-secondary bg-primary pb-4">
                         <form class="d-none d-md-flex flex-column pt-3">
@@ -339,16 +345,66 @@
                     </div>
 
                 </div>
-                <!-- Contact Form Start -->
+                <!-- Contact Form End -->                
 
             </div>
-            <!-- Side Content Section Start -->
+            <!-- Side Content Section End -->
 
         </div>
-        <!-- 1st row end -->
+        <!-- 1st row end -->       
         
     </div>
     <!-- Main Content Section End -->
+
+    <!-- Footer Start -->
+    <footer class="footer-color text-white text-left text-lg-start">
+    
+        <!-- Grid container -->
+        <div class="container-fluid p-4">
+            
+            <!--Grid row-->
+            <div class="row">
+                
+                <!--Grid column-->
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0 me-auto">
+                    <h5 class="text-uppercase">Other ways to contact me:</h5>
+                    <p>You can also contact me through the following platforms or social media.</p>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0 me-auto">
+                    <h5 class="text-uppercase">Links and Contact Numbers</h5>
+
+                    <ul class="list-unstyled mb-0">
+                        <li>                            
+                            <a class="btn text-white btn-floating m-1" style="background-color: #0082ca;" 
+                                href="https://www.linkedin.com/in/ronald-repollo-38389888/" role="button">
+                                <i class="fa fa-linkedin-square"></i>
+                            </a>
+                            <p>My LinkedIn</p>
+                        </li>
+                        <li>
+                            <p>Globe: +639000000000</p> 
+                        </li>                        
+                    </ul>
+                </div>
+                <!--Grid column-->
+          
+            </div>
+            <!--Grid row-->
+
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-left p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            <p>© 2017-2023 Copyright: Zuitt. All Rights Reserved.</p>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+    <!-- Footer End -->
 
     <!-- Bootstrap Script -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
