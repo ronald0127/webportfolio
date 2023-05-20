@@ -1,5 +1,13 @@
+html {
+  scroll-behavior: smooth;
+}
+
 .text-justify {
   text-align: justify;
+}
+
+.custom-color-1 {
+  color: #40eb34;
 }
 
 .custom-size-1 {
@@ -14,10 +22,6 @@
 
 .custom-height-1 {
   height: 300px;
-}
-
-.custom-width-1 {
-  width: 99%;
 }
 
 .bg-img-1 {
@@ -36,12 +40,16 @@
   height: auto;
 }
 
-.carousel-control-next, .carousel-control-prev {
-  filter: invert(100%);  
+.bg-img-3 {
+  background-image: url(./images/program.jpg);
+  /*background-repeat: no-repeat;*/
+  background-position: center;
+  width: auto;
+  height: auto;
 }
 
-html {
-  scroll-behavior: smooth;
+.carousel-control-next, .carousel-control-prev {
+  filter: invert(100%);
 }
 
 .footer-color {
