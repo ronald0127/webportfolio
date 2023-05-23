@@ -20,8 +20,9 @@ html {
   width: 40px;
 }
 
-.custom-height-1 {
+.custom-size-3 {
   height: 300px;
+  width: 500px;
 }
 
 .bg-img-1 {
@@ -42,6 +43,14 @@ html {
 
 .bg-img-3 {
   background-image: url(./images/program.jpg);
+  /*background-repeat: no-repeat;*/
+  background-position: center;
+  width: auto;
+  height: auto;
+}
+
+.bg-img-4 {
+  background-image: url(./images/card-bg.jpg);
   /*background-repeat: no-repeat;*/
   background-position: center;
   width: auto;
