@@ -385,6 +385,10 @@
     <!-- Form Submit Script Start -->
     <script type="text/javascript">
         function submitClick() {
+            $('#myModal').on('click', '.modal-backdrop', function(e) {
+                e.preventDefault();
+            });
+            
             let name = document.forms["myForm"]["nameFull"].value;
             let email = document.forms["myForm"]["email"].value;
             let number = document.forms["myForm"]["contactNumber"].value;
@@ -401,15 +405,13 @@
             else {
                 document.getElementById("myForm").submit();
                 $("#myModal").modal({
+                    show: true,
                     backdrop: 'static',
                     keyboard: false
                 });
                 $('#myModal').modal();
             }
         }
-        $('#myModal').on('hidden.bs.modal', function () {
-            $(this).find('form').trigger('reset');
-        })
     </script>
     <!-- Form Submit Script End -->
 
