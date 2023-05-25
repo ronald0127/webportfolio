@@ -1,0 +1,54 @@
+#pgraph3 {
+	color: yellow;
+}
+
+* {
+	font-size: 19px;
+	font-family: "Arial", monospace;
+}
+
+h1 {
+	font-size: 60px;
+}
+
+#learnings-h2 {
+	text-transform: uppercase;
+	font-size: 23px;
+}
+#languages-h2 {
+	font-size: 22px;
+}
+#tools-h2 {
+	font-size: 21px;
+}
+#others-h2 {
+	font-size: 20px;
+}
+
+.languages-to-learn {
+	background-color: mediumseagreen;
+}
+
+[value] {
+	border-width: 2px;
+	border-style: solid;
+	border-color: navy;
+}
+
+#learnings img {
+	height: 200px;
+	width: 200px;
+	border-radius: 100px;
+}
+
+img + ul {
+	list-style-type: none;
+}
+
+#others > ul {
+	letter-spacing: 7px;
+}
+
+h2 ~ p {
+	text-align: center;
+}

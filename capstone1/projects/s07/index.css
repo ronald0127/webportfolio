@@ -1,0 +1,109 @@
+/* CSS Reset */
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+header {
+	padding: 0.8rem;
+	margin-bottom: 2rem;
+	align-items: center;
+	border-bottom: 1px solid gray;
+}
+
+header .nav, header .nav-logo {
+	margin: 0.5rem;
+	display: inline;
+}
+
+/* Styles for Introductory Section */
+#intro {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 2rem;
+	padding-bottom: 3rem;
+}
+
+#intro h1, #intro p {
+	margin-bottom: 1rem;
+	text-align: center;
+}
+
+#intro div {
+	text-align: center;
+}
+
+#intro button {
+	color: white;
+	font-weight: bold;
+	background-color: #c2195b;
+	border-radius: 25px;
+	font-size: 1rem;
+	padding: 1rem;
+}
+
+/* Styles for Section Headers */
+
+.header {
+	text-align: center;
+}
+
+#succeed-info {
+	padding-left: 10%;
+	padding-right: 10%;
+	padding-top: 2rem;
+	padding-bottom: 3rem;
+}
+
+#succeed-info > div > h3 {
+	margin-bottom: 1rem;
+}
+
+#succeed-info div {
+	display: inline;
+	width: 33.33%;
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+/* Styles for Footer */
+
+footer {
+	display: inline-block;
+	padding: 0.7rem;
+}
+
+footer span {
+	margin-left: 0.5rem;
+	margin-right: 0.5rem;
+}
+
+#pre-footer {
+	min-height: 20vh;
+    background-color: #002540;
+    color: white;
+
+    padding-left: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#pre-footer div {
+	display: inline-block;
+	width: 20%;
+}
+
+#pre-footer > div > h3 {
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
+}
+
+#pre-footer > div > p {
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
+}

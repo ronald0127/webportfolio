@@ -25,6 +25,10 @@ html {
   width: 500px;
 }
 
+.custom-height-1 {
+  height: 750px;
+}
+
 .bg-img-1 {
   background-image: url(./images/grey.jpg);
   background-repeat: no-repeat;
@@ -63,4 +67,12 @@ html {
 
 .footer-color {
   background-color: #006400;
+}
+
+.copyright-color {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.icon-size {
+  font-size:24px
 }
