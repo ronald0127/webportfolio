@@ -2,12 +2,12 @@ html {
   scroll-behavior: smooth;
 }
 
-.text-justify {
-  text-align: justify;
+.font-1 {
+  font-family: 'Pathway Extreme', sans-serif;
 }
 
-.custom-color-1 {
-  color: #40eb34;
+.text-justify {
+  text-align: justify;
 }
 
 .custom-size-1 {
@@ -67,6 +67,11 @@ html {
 
 .carousel-indicator-button {
   filter: invert(100%);
+}
+
+.navbar-color {
+  background-color: #006600;
+  /* #052e66 */
 }
 
 .footer-color {
