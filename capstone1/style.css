@@ -65,6 +65,10 @@ html {
   filter: invert(100%);
 }
 
+.carousel-indicator-button {
+  filter: invert(100%);
+}
+
 .footer-color {
   background-color: #006400;
 }
