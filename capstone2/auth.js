@@ -12,13 +12,12 @@ module.exports.createAccessToken = (user) => {
 
 module.exports.verify = (request, response, next) => {
 	let token = request.headers.authorization;
-	console.log(`\n${token}\n`);
 
 	if (token !== undefined) {
 		token = token.slice(7, token.length);
 		return jwt.verify(token, secret, (error, data) => {
 			if (error) {
-				return response.send("Auth failed!");
+				return response.send("Authentication failed!");
 			}
 			else {
 				next();

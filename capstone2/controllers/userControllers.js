@@ -1,5 +1,5 @@
 const User = require("../models/Users.js");
-const auth = require("../auth.js")
+const auth = require("../auth.js");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
@@ -55,4 +55,25 @@ module.exports.userDetails = (request, response) => {
 			return response.send(`User ${userEmail} is not found.`);
 		}
 	}).catch(error => response.send(error));
+}
+
+module.exports.setUserAsAdmin = (request, response) => {
+	const userData = auth.decode(request.headers.authorization);
+	const email = request.body.email;
+
+	if (userData.isAdmin) {
+		User.findOneAndUpdate({email: email}, {isAdmin: true})
+		.then(result => {
+			console.log(result);
+			if (result) {
+				return response.send(`User ${email} is now an admin.`);
+			}
+			else {
+				return response.send(`User ${email} not found.`);
+			}
+		}).catch(error => response.send(error));
+	}
+	else {
+		return response.send("Admin Only! You don't have access to this route.");
+	}
 }
