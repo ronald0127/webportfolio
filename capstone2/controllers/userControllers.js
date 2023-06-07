@@ -115,7 +115,6 @@ module.exports.setUserAsAdmin = (request, response) => {
 	if (userData.isAdmin) {
 		User.findOneAndUpdate({email: email}, {isAdmin: true})
 		.then(result => {
-			console.log(result);
 			if (result) {
 				return response.send(`User ${email} is now an admin.`);
 			}

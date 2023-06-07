@@ -111,5 +111,150 @@ module.exports.seeMyOrders = async (request, response) => {
 }
 
 module.exports.addProductsToCart = (request, response) => {
+	const userData = auth.decode(request.headers.authorization);
 
+	if (userData.isAdmin) {
+		return response.send("User only! You don't have access to this route.");
+	}
+	else {
+		const orderId = request.params.orderId;
+		const productId = request.body.productId;
+		const productQty = request.body.quantity;
+
+		Product.findById(productId).then(result => {
+			const productPrice = result.price;
+			if (result.isActive) {
+				Order.findById(orderId).then(result => {
+					let isItemInside = false;
+
+					if (userData.id == result.userId) {
+						result.products.forEach(product => {
+							if (product.productId == productId) {
+								isItemInside = true;
+							}
+						});
+
+						if (!isItemInside) {
+							result.products.push({
+								productId: productId,
+								quantity: productQty
+							});
+							result.totalAmount = result.totalAmount + (productPrice * productQty);
+
+							result.save()
+							.then(result => response.send("The item has been successfully added to your cart."))
+							.catch(error => response.send(error));
+						}
+						else {
+							return response.send("This item is already included to your cart. Please double check.");
+						}
+					}
+					else {
+						return response.send(`This order belongs to another user. Invalid orderId parameter in URL (${orderId}).`);
+					}
+				}).catch(error => response.send(error));
+			}
+			else {
+				return response.send("This product is inactive / out of stock. Cannot add to cart.");
+			}
+		}).catch(error => response.send(error));
+	}
+}
+
+module.exports.updateProductQuantity = (request, response) => {
+	const userData = auth.decode(request.headers.authorization);
+
+	if (userData.isAdmin) {
+		return response.send("User only! You don't have access to this route.");
+	}
+	else {
+		const orderId = request.params.orderId;
+		const productId = request.body.productId;
+		const productQty = request.body.quantity;
+
+		Product.findById(productId).then(result => {
+			const productPrice = result.price;
+			if (result.isActive) {
+				Order.findById(orderId).then(result => {
+					let isItemInside = false;
+					let index = 0;
+
+					if (userData.id == result.userId) {
+						result.products.forEach(product => {
+							if (product.productId == productId) {
+								isItemInside = true;
+								result.totalAmount = result.totalAmount - (productPrice * result.products[index].quantity);
+								result.products[index].quantity = productQty;
+								result.totalAmount = result.totalAmount + (productPrice * productQty);
+							}
+							index++;
+						});
+
+						if (isItemInside) {
+							result.save()
+							.then(result => response.send("The item quantity has been successfully updated."))
+							.catch(error => response.send(error));
+						}
+						else {
+							return response.send("Item not found inside your cart. Please double check.");
+						}
+					}
+					else {
+						return response.send(`This order belongs to another user. Invalid orderId parameter in URL (${orderId}).`);
+					}
+				}).catch(error => response.send(error));
+			}
+			else {
+				return response.send("This product is inactive / out of stock. Cannot add to cart.");
+			}
+		}).catch(error => response.send(error));
+	}
+}
+
+module.exports.removeItemToCart = (request, response) => {
+	const userData = auth.decode(request.headers.authorization);
+
+	if (userData.isAdmin) {
+		return response.send("User only! You don't have access to this route.");
+	}
+	else {
+		const orderId = request.params.orderId;
+		const productId = request.body.productId;
+
+		Product.findById(productId).then(result => {
+			const productPrice = result.price;
+			Order.findById(orderId).then(result => {
+				let isItemInside = false;
+				let index = 0;
+
+				if (userData.id == result.userId) {
+					result.products.forEach(product => {
+						if (product.productId == productId) {
+							isItemInside = true;
+							result.totalAmount = result.totalAmount - (productPrice * result.products[index].quantity);
+							result.products.splice(index, 1);
+						}
+						index++;
+					});
+
+					if (isItemInside) {
+						result.save().then(result => {
+							if (result.products.length <= 0) {
+								Order.findByIdAndRemove(orderId)
+								.then(removed => console.log(`Order ${orderId} successfully removed.`))
+								.catch(error => response.send(error));
+							}
+							return response.send("The item has been successfully deleted.");
+						}).catch(error => response.send(error));
+					}
+					else {
+						return response.send("Item not found inside your cart. Please double check.");
+					}
+				}
+				else {
+					return response.send(`This order belongs to another user. Invalid orderId parameter in URL (${orderId}).`);
+				}
+			}).catch(error => response.send(error));
+		}).catch(error => response.send(error));
+	}
 }
