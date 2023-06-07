@@ -46,13 +46,14 @@ module.exports.loginUser = (request, response) => {
 }
 
 module.exports.userDetails = (request, response) => {
-	const userEmail = request.body.email;
-	User.findOne({email: userEmail}).then(result => {
+	const email = request.body.email;
+	User.findOne({email: email}).then(result => {
 		if (result) {
+			result.password = "Confidential";
 			return response.send(result);
 		}
 		else {
-			return response.send(`User ${userEmail} is not found.`);
+			return response.send(`User ${email} is not found.`);
 		}
 	}).catch(error => response.send(error));
 }
