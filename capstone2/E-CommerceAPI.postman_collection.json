@@ -7,78 +7,6 @@
 	},
 	"item": [
 		{
-			"name": "userDetails",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"user1@mail.com\"\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:4001/users/userDetails",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4001",
-					"path": [
-						"users",
-						"userDetails"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "allProducts",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:4001/products/getAllProducts",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4001",
-					"path": [
-						"products",
-						"getAllProducts"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "allOrders",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:4001/orders/getAllOrders",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "4001",
-					"path": [
-						"orders",
-						"getAllOrders"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "registerUser",
 			"request": {
 				"method": "POST",
@@ -117,7 +45,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"user1@mail.com\",\r\n    \"password\": \"123\"\r\n}",
+					"raw": "{\r\n    \"email\": \"user2@mail.com\",\r\n    \"password\": \"12345\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -138,6 +66,455 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "addProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"MX3\",\r\n    \"description\": \"Natural Food Supplement.\",\r\n    \"price\": \"300\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/products/addProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"products",
+						"addProduct"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/products/getAllProducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"products",
+						"getAllProducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activeProducts",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/products/getActiveProducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"products",
+						"getActiveProducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "productDetails",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/products/getProduct/647e9b94ee602454e2b12c143",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"products",
+						"getProduct",
+						"647e9b94ee602454e2b12c143"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Neozep\",\r\n    \"description\": \"Paracetamol, treatment for colds.\",\r\n    \"price\": \"80\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/products/updateProduct/{{product_neozep}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"products",
+						"updateProduct",
+						"{{product_neozep}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "archiveProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/products/647e9c5235b2aeeb9d6489be/archive",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"products",
+						"647e9c5235b2aeeb9d6489be",
+						"archive"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "activateProduct",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/products/647e9c5235b2aeeb9d6489be/activate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"products",
+						"647e9c5235b2aeeb9d6489be",
+						"activate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createOrder",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"orderedProducts\": [\r\n        {\r\n            \"productId\": \"647e9b94ee602454e2b12c14\",\r\n            \"quantity\": \"1\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/orders/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"orders",
+						"checkout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userDetails",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user1}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/users/userDetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"users",
+						"userDetails"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setUserAsAdmin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0N2U5NmVmZDg0NGJkZDhjMjhlZTdiNyIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODYwMTc4OTZ9.f47OxR6oLz6x4xI8ByrxR9sO__6f0Bowo93qLQcmwrE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"user2@mail.com\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4001/users/setAsAdmin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"users",
+						"setAsAdmin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userOrders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{user2}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/orders/seeMyOrders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"orders",
+						"seeMyOrders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "allOrders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{admin}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/orders/getAllOrders",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"orders",
+						"getAllOrders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProductsToCart",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4001/orders/addToCart/647f3b7af14a0634e557eedb",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4001",
+					"path": [
+						"orders",
+						"addToCart",
+						"647f3b7af14a0634e557eedb"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "admin",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0N2U5NmVmZDg0NGJkZDhjMjhlZTdiNyIsImVtYWlsIjoiYWRtaW5AbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODYwMTc4OTZ9.f47OxR6oLz6x4xI8ByrxR9sO__6f0Bowo93qLQcmwrE"
+		},
+		{
+			"key": "user1",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0N2U4MzJkZWRiMmQ4NjY4ZDQwYmY1MyIsImVtYWlsIjoidXNlcjFAbWFpbC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjg2MDE4NTMwfQ.dmTPLV41waGK3EKSOhmSe0bt07kc3UUcALklm0t6prY"
+		},
+		{
+			"key": "user2",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0N2U5NzI2ZDg0NGJkZDhjMjhlZTdiYSIsImVtYWlsIjoidXNlcjJAbWFpbC5jb20iLCJpc0FkbWluIjp0cnVlLCJpYXQiOjE2ODYwMTg3MDR9.uMbtG9dmWbn-1XDrRjXBc3mgG88H7s_DgNRYGCpERyE"
+		},
+		{
+			"key": "product_mx3",
+			"value": "647e9c5235b2aeeb9d6489be"
+		},
+		{
+			"key": "product_neozep",
+			"value": "647e9be735b2aeeb9d6489bc"
+		},
+		{
+			"key": "product_biogesic",
+			"value": "647e9b94ee602454e2b12c14"
 		}
 	]
 }

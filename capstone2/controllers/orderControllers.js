@@ -76,21 +76,25 @@ module.exports.seeMyOrders = async (request, response) => {
 			response.send("You don't have any orders yet.");
 		}
 		else {
-			const promisesOuter = ordersData.map(async order => {
-				const promises = order.products.map(async product => {
+			const promisesOrders = ordersData.map(async order => {
+				const promisesProducts = order.products.map(async product => {
 					const orderedProduct = await Product.findById(product.productId).then(result => {
 						let productDetails = {
+							productId: result._id,
 							name: result.name,
-							quantity: product.quantity
+							price: result.price,
+							quantity: product.quantity,
+							subTotal: result.price * product.quantity
 						};
 						return productDetails;
 					}).catch(error => response.send(error));
 					return orderedProduct;
 				});
 
-				const orderedProducts = await Promise.all(promises);
+				const orderedProducts = await Promise.all(promisesProducts);
 
 				let userOrders = {
+					orderId: order._id,
 					email: userData.email,
 					totalAmount: order.totalAmount,
 					purchasedOn: order.purchasedOn,
@@ -100,8 +104,12 @@ module.exports.seeMyOrders = async (request, response) => {
 				return userOrders;
 			});
 
-			const userOrdersArray = await Promise.all(promisesOuter);
+			const userOrdersArray = await Promise.all(promisesOrders);
 			return response.send(userOrdersArray);
 		}
 	}
+}
+
+module.exports.addProductsToCart = (request, response) => {
+
 }

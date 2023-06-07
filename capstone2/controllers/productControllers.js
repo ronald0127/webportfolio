@@ -1,4 +1,6 @@
 const Product = require("../models/Products.js");
+const Order = require("../models/Orders.js");
+const User = require("../models/Users.js");
 const auth = require("../auth.js");
 const mongoose = require("mongoose");
 
@@ -30,9 +32,41 @@ module.exports.getAllActiveProducts = (request, response) => {
 }
 
 module.exports.getSingleProduct = (request, response) => {
-	Product.findOne({_id: request.params.productId})
-	.then(result => response.send(result))
-	.catch(error => response.send(error));
+	Product.findOne({_id: request.params.productId}).then(async result => {
+		let resultArray = []
+		resultArray.push(result);
+
+		const ordersData = await Order.find({"products.productId": result._id}).then(result => {
+			if (result.length > 0) {
+				return result;
+			}
+			else {
+				return false;
+			}
+		}).catch(error => response.send(error));
+
+		if (ordersData !== false) {
+			const promisesOrders = ordersData.map(async order => {
+				const userEmail = await User.findById(order.userId)
+				.then(result => result.email)
+				.catch(error => response.send(error));
+
+				const userOrders = {
+					orderId: order._id,
+					userId: order.userId,
+					email: userEmail
+				}
+
+				return userOrders;
+			});
+
+			const userOrders = await Promise.all(promisesOrders);
+			resultArray.push(userOrders);
+		}
+
+		return response.send(resultArray);
+
+	}).catch(error => response.send(error));
 }
 
 module.exports.addProduct = (request, response) => {

@@ -1,4 +1,6 @@
 const User = require("../models/Users.js");
+const Order = require("../models/Orders.js");
+const Product = require("../models/Products.js");
 const auth = require("../auth.js");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
@@ -46,16 +48,64 @@ module.exports.loginUser = (request, response) => {
 }
 
 module.exports.userDetails = (request, response) => {
-	const email = request.body.email;
-	User.findOne({email: email}).then(result => {
-		if (result) {
-			result.password = "Confidential";
-			return response.send(result);
-		}
-		else {
-			return response.send(`User ${email} is not found.`);
-		}
-	}).catch(error => response.send(error));
+	const userData = auth.decode(request.headers.authorization);
+	if (!userData.isAdmin) {
+		User.findOne({email: userData.email}).then(async result => {
+			if (result) {
+				let resultArray = [];
+				result.password = "Confidential";
+				resultArray.push(result);
+
+				const ordersData = await Order.find({userId: userData.id}).then(result => {
+					if (result.length > 0) {
+						return result;
+					}
+					else {
+						return false;
+					}
+				}).catch(error => response.send(error));
+
+				if (ordersData !== false) {
+					const promisesOrders = ordersData.map(async order => {
+						const promisesProducts = order.products.map(async product => {
+							const orderedProduct = await Product.findById(product.productId).then(result => {
+								let productDetails = {
+									name: result.name,
+									price: result.price,
+									quantity: product.quantity,
+									subTotal: result.price * product.quantity
+								};
+								return productDetails;
+							}).catch(error => response.send(error));
+							return orderedProduct;
+						});
+
+						const orderedProducts = await Promise.all(promisesProducts);
+
+						let userOrders = {
+							orderId: order._id,
+							totalAmount: order.totalAmount,
+							purchasedOn: order.purchasedOn,
+							products: orderedProducts
+						};
+
+						return userOrders;
+					});
+
+					const userOrdersArray = await Promise.all(promisesOrders);
+					resultArray.push(userOrdersArray);
+				}
+				
+				return response.send(resultArray);
+			}
+			else {
+				return response.send(`User ${userData.email} is not found.`);
+			}
+		}).catch(error => response.send(error));
+	}
+	else {
+		return response.send("Users only! You don't have access to this route.");
+	}
 }
 
 module.exports.setUserAsAdmin = (request, response) => {
