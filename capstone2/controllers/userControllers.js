@@ -52,9 +52,11 @@ module.exports.userDetails = (request, response) => {
 	if (!userData.isAdmin) {
 		User.findOne({email: userData.email}).then(async result => {
 			if (result) {
-				let resultArray = [];
 				result.password = "Confidential";
-				resultArray.push(result);
+				let resultReturn = {
+					userDetails: result,
+					orders: []
+				};
 
 				const ordersData = await Order.find({userId: userData.id}).then(result => {
 					if (result.length > 0) {
@@ -93,10 +95,10 @@ module.exports.userDetails = (request, response) => {
 					});
 
 					const userOrdersArray = await Promise.all(promisesOrders);
-					resultArray.push(userOrdersArray);
+					resultReturn.orders = userOrdersArray;
 				}
 				
-				return response.send(resultArray);
+				return response.send(resultReturn);
 			}
 			else {
 				return response.send(`User ${userData.email} is not found.`);

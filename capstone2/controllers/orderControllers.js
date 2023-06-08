@@ -238,13 +238,14 @@ module.exports.removeItemToCart = (request, response) => {
 					});
 
 					if (isItemInside) {
+						let addtnlMessage = ``;
 						result.save().then(result => {
 							if (result.products.length <= 0) {
 								Order.findByIdAndRemove(orderId)
-								.then(removed => console.log(`Order ${orderId} successfully removed.`))
+								.then(removed => addtnlMessage = `Order ${orderId} successfully removed.`)
 								.catch(error => response.send(error));
 							}
-							return response.send("The item has been successfully deleted.");
+							return response.send("The item has been successfully deleted." + "\n" + addtnlMessage);
 						}).catch(error => response.send(error));
 					}
 					else {

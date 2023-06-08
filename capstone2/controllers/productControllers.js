@@ -33,8 +33,10 @@ module.exports.getAllActiveProducts = (request, response) => {
 
 module.exports.getSingleProduct = (request, response) => {
 	Product.findOne({_id: request.params.productId}).then(async result => {
-		let resultArray = []
-		resultArray.push(result);
+		let resultReturn = {
+			productDetails: result,
+			orders: []
+		};
 
 		const ordersData = await Order.find({"products.productId": result._id}).then(result => {
 			if (result.length > 0) {
@@ -61,10 +63,10 @@ module.exports.getSingleProduct = (request, response) => {
 			});
 
 			const userOrders = await Promise.all(promisesOrders);
-			resultArray.push(userOrders);
+			resultReturn.orders = userOrders;
 		}
 
-		return response.send(resultArray);
+		return response.send(resultReturn);
 
 	}).catch(error => response.send(error));
 }
