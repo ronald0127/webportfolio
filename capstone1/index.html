@@ -372,7 +372,7 @@
                             <label for="message">Message</label>
                             <textarea name="message" id="message" rows="5" class="mb-3 w-75 mx-auto border border-primary"></textarea>
 
-                            <a href="#contactMe" type="button" onclick="submitClick()" class="btn btn-dark w-25 mx-auto mt-5 rounded-3 border border-light">Send Email</a>
+                            <a type="button" onclick="submitClick()" class="btn btn-dark w-25 mx-auto mt-5 rounded-3 border border-light">Send Email</a>
                         </form>
                     </div>
                 </div>
@@ -393,7 +393,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title text-dark">Thank you for contacting me!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="resetForm()">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
@@ -401,7 +401,7 @@
                     <p class="text-dark">Message Successfully Sent.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="resetForm()">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
                         Close
                     </button>
                 </div>
@@ -489,11 +489,11 @@
 
     <!-- Form Submit Script Start -->
     <script type="text/javascript">
-        function submitClick() {
-            $('#myModal').on('click', '.modal-backdrop', function(e) {
-                e.preventDefault();
-            });
-            
+        document.querySelector('#myForm').addEventListener('submit', (event) => {
+            event.preventDefault();
+        });
+
+        const submitClick = () => {
             let name = document.forms["myForm"]["nameFull"].value;
             let email = document.forms["myForm"]["email"].value;
             let number = document.forms["myForm"]["contactNumber"].value;
@@ -508,17 +508,9 @@
                 alert("Contact number must be filled out.");
             }
             else {
-                document.getElementById("myForm").submit();
-                $("#myModal").modal({
-                    show: true,
-                    backdrop: 'static',
-                    keyboard: false
-                });
-                $('#myModal').modal();
+                $("#myModal").modal();
+                document.getElementById("myForm").reset();
             }
-        }
-        function resetForm() {
-            document.getElementById("myForm").reset();
         }
     </script>
     <!-- Form Submit Script End -->
