@@ -11,19 +11,19 @@ module.exports.getAllOrders = (request, response) => {
 				return response.send(result);
 			}
 			else {
-				return response.send("No orders found.");
+				return response.send(false);
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 	}
 	else {
-		return response.send("Admin only! You don't have access to this route.");
+		return response.send(false);
 	}
 }
 
 module.exports.createOrder = async (request, response) => {
 	const userData = auth.decode(request.headers.authorization);
 	if(userData.isAdmin) {
-		return response.send("Users only! You don't have access to this route.");
+		return response.send(false);
 	}
 	else {
 		const orderedProducts = request.body.orderedProducts;
@@ -36,14 +36,14 @@ module.exports.createOrder = async (request, response) => {
 				else {
 					return result.price * product.quantity;
 				}
-			}).catch(error => response.send(error));
+			}).catch(error => response.send(false));
 			return subTotal;
 		});
 
 		const subTotals = await Promise.all(promises);
 
 		if (subTotals.includes(false)) {
-			return response.send("Cart has inactive product. Please double check and remove inactive products.");
+			return response.send(false);
 		}
 		else {
 			const total = subTotals.reduce((a, b) => a + b, 0);
@@ -51,8 +51,8 @@ module.exports.createOrder = async (request, response) => {
 				userId: userData.id,
 				totalAmount: total,
 				products: orderedProducts
-			}).save().then(result => response.send(`Order successfully created!`))
-			.catch(error => response.send(error));
+			}).save().then(result => response.send(true))
+			.catch(error => response.send(false));
 		}
 	}
 }
@@ -60,7 +60,7 @@ module.exports.createOrder = async (request, response) => {
 module.exports.seeMyOrders = async (request, response) => {
 	const userData = auth.decode(request.headers.authorization);
 	if(userData.isAdmin) {
-		return response.send("Users only! You don't have access to this route.");
+		return response.send(false);
 	}
 	else {
 		const ordersData = await Order.find({userId: userData.id}).then(result => {
@@ -70,10 +70,10 @@ module.exports.seeMyOrders = async (request, response) => {
 			else {
 				return false;
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 
 		if (!ordersData) {
-			response.send("You don't have any orders yet.");
+			response.send(false);
 		}
 		else {
 			const promisesOrders = ordersData.map(async order => {
@@ -87,7 +87,7 @@ module.exports.seeMyOrders = async (request, response) => {
 							subTotal: result.price * product.quantity
 						};
 						return productDetails;
-					}).catch(error => response.send(error));
+					}).catch(error => response.send(false));
 					return orderedProduct;
 				});
 
@@ -114,7 +114,7 @@ module.exports.addProductsToCart = (request, response) => {
 	const userData = auth.decode(request.headers.authorization);
 
 	if (userData.isAdmin) {
-		return response.send("User only! You don't have access to this route.");
+		return response.send(false);
 	}
 	else {
 		const orderId = request.params.orderId;
@@ -142,22 +142,22 @@ module.exports.addProductsToCart = (request, response) => {
 							result.totalAmount = result.totalAmount + (productPrice * productQty);
 
 							result.save()
-							.then(result => response.send("The item has been successfully added to your cart."))
-							.catch(error => response.send(error));
+							.then(result => response.send(true))
+							.catch(error => response.send(false));
 						}
 						else {
-							return response.send("This item is already included to your cart. Please double check.");
+							return response.send(false);
 						}
 					}
 					else {
-						return response.send(`This order belongs to another user. Invalid orderId parameter in URL (${orderId}).`);
+						return response.send(false);
 					}
-				}).catch(error => response.send(error));
+				}).catch(error => response.send(false));
 			}
 			else {
-				return response.send("This product is inactive / out of stock. Cannot add to cart.");
+				return response.send(false);
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 	}
 }
 
@@ -165,7 +165,7 @@ module.exports.updateProductQuantity = (request, response) => {
 	const userData = auth.decode(request.headers.authorization);
 
 	if (userData.isAdmin) {
-		return response.send("User only! You don't have access to this route.");
+		return response.send(false);
 	}
 	else {
 		const orderId = request.params.orderId;
@@ -192,22 +192,22 @@ module.exports.updateProductQuantity = (request, response) => {
 
 						if (isItemInside) {
 							result.save()
-							.then(result => response.send("The item quantity has been successfully updated."))
-							.catch(error => response.send(error));
+							.then(result => response.send(true))
+							.catch(error => response.send(false));
 						}
 						else {
-							return response.send("Item not found inside your cart. Please double check.");
+							return response.send(false);
 						}
 					}
 					else {
-						return response.send(`This order belongs to another user. Invalid orderId parameter in URL (${orderId}).`);
+						return response.send(false);
 					}
-				}).catch(error => response.send(error));
+				}).catch(error => response.send(false));
 			}
 			else {
-				return response.send("This product is inactive / out of stock. Cannot add to cart.");
+				return response.send(false);
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 	}
 }
 
@@ -215,7 +215,7 @@ module.exports.removeItemToCart = (request, response) => {
 	const userData = auth.decode(request.headers.authorization);
 
 	if (userData.isAdmin) {
-		return response.send("User only! You don't have access to this route.");
+		return response.send(false);
 	}
 	else {
 		const orderId = request.params.orderId;
@@ -243,19 +243,19 @@ module.exports.removeItemToCart = (request, response) => {
 							if (result.products.length <= 0) {
 								Order.findByIdAndRemove(orderId)
 								.then(removed => addtnlMessage = `Order ${orderId} successfully removed.`)
-								.catch(error => response.send(error));
+								.catch(error => response.send(false));
 							}
-							return response.send("The item has been successfully deleted." + "\n" + addtnlMessage);
-						}).catch(error => response.send(error));
+							return response.send(true);
+						}).catch(error => response.send(false));
 					}
 					else {
-						return response.send("Item not found inside your cart. Please double check.");
+						return response.send(false);
 					}
 				}
 				else {
-					return response.send(`This order belongs to another user. Invalid orderId parameter in URL (${orderId}).`);
+					return response.send(false);
 				}
-			}).catch(error => response.send(error));
-		}).catch(error => response.send(error));
+			}).catch(error => response.send(false));
+		}).catch(error => response.send(false));
 	}
 }

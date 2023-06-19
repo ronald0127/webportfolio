@@ -11,12 +11,12 @@ module.exports.getAllProducts = (request, response) => {
 				return response.send(result);
 			}
 			else {
-				return response.send("No products found.");
+				return response.send(false);
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 	}
 	else {
-		return response.send("Admin Only! You don't have access to this route.");
+		return response.send(false);
 	}
 }
 
@@ -26,9 +26,9 @@ module.exports.getAllActiveProducts = (request, response) => {
 			return response.send(result);
 		}
 		else {
-			return response.send("No active products found.");
+			return response.send(false);
 		}
-	}).catch(error => response.send(error));
+	}).catch(error => response.send(false));
 }
 
 module.exports.getSingleProduct = (request, response) => {
@@ -45,13 +45,13 @@ module.exports.getSingleProduct = (request, response) => {
 			else {
 				return false;
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 
 		if (ordersData !== false) {
 			const promisesOrders = ordersData.map(async order => {
 				const userEmail = await User.findById(order.userId)
 				.then(result => result.email)
-				.catch(error => response.send(error));
+				.catch(error => response.send(false));
 
 				const userOrders = {
 					orderId: order._id,
@@ -68,7 +68,7 @@ module.exports.getSingleProduct = (request, response) => {
 
 		return response.send(resultReturn);
 
-	}).catch(error => response.send(error));
+	}).catch(error => response.send(false));
 }
 
 module.exports.addProduct = (request, response) => {
@@ -78,11 +78,11 @@ module.exports.addProduct = (request, response) => {
 			name: request.body.name,
 			description: request.body.description,
 			price: request.body.price
-		}).save().then(saved => response.send("Product successfully created!"))
-		.catch(error => response.send(error));
+		}).save().then(saved => response.send(true))
+		.catch(error => response.send(false));
 	}
 	else {
-		return response.send("Admin Only! You don't have access to this route.");
+		return response.send(false);
 	}
 }
 
@@ -94,11 +94,11 @@ module.exports.updateProduct = (request, response) => {
 			name: request.body.name,
 			description: request.body.description,
 			price: request.body.price
-		}).then(result => response.send(`Product ${productId} was successfully updated.`))
-		.catch(error => response.send(error));
+		}).then(result => response.send(true))
+		.catch(error => response.send(false));
 	}
 	else {
-		return response.send("Admin Only! You don't have access to this route.");
+		return response.send(false);
 	}
 }
 
@@ -107,11 +107,11 @@ module.exports.archiveProduct = (request, response) => {
 	if (userData.isAdmin) {
 		const productId = request.params.productId;
 		Product.findByIdAndUpdate(productId, {isActive: false})
-		.then(result => response.send(`Product ${result.name} with ID ${productId} was successfully archived.`))
-		.catch(error => response.send(error));
+		.then(result => response.send(true))
+		.catch(error => response.send(false));
 	}
 	else {
-		return response.send("Admin Only! You don't have access to this route.");
+		return response.send(false);
 	}
 }
 
@@ -120,10 +120,10 @@ module.exports.activateProduct = (request, response) => {
 	if (userData.isAdmin) {
 		const productId = request.params.productId;
 		Product.findByIdAndUpdate(productId, {isActive: true})
-		.then(result => response.send(`Product ${result.name} with ID ${productId} was successfully activated.`))
-		.catch(error => response.send(error));
+		.then(result => response.send(true))
+		.catch(error => response.send(false));
 	}
 	else {
-		return response.send("Admin Only! You don't have access to this route.");
+		return response.send(false);
 	}
 }

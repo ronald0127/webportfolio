@@ -11,20 +11,20 @@ module.exports.registerUser = (request, response) => {
 	if (email != '' && password != '') {
 		User.findOne({email: email}).then(result => {
 			if (result != null) {
-				return response.send("This email is already registered, please use a new one.");
+				return response.send(false);
 			}
 			else {
 				new User({
 					email: email,
 					password: bcrypt.hashSync(password, 10)
 				}).save()
-				.then(saved => response.send(`Email ${email} was successfully registered!`))
-				.catch(error => response.send(error));				
+				.then(saved => response.send(true))
+				.catch(error => response.send(false));				
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 	}
 	else {
-		return response.send("Both email and password must not be empty!");
+		return response.send(false);
 	}
 }
 
@@ -35,16 +35,16 @@ module.exports.loginUser = (request, response) => {
 		if (result) {
 			const isPasswordCorrect = bcrypt.compareSync(password, result.password);
 			if (isPasswordCorrect) {
-				return response.send(`Login successful!\n\nToken created: ${auth.createAccessToken(result)}`);
+				return response.send({auth: auth.createAccessToken(result)});
 			}
 			else {
-				return response.send("Invalid password! Please check your password.");
+				return response.send(false);
 			}
 		}
 		else {
-			return response.send(`Email ${email} is not yet registered.`);
+			return response.send(false);
 		}
-	}).catch(error => response.send(error));
+	}).catch(error => response.send(false));
 }
 
 module.exports.userDetails = (request, response) => {
@@ -65,7 +65,7 @@ module.exports.userDetails = (request, response) => {
 					else {
 						return false;
 					}
-				}).catch(error => response.send(error));
+				}).catch(error => response.send(false));
 
 				if (ordersData !== false) {
 					const promisesOrders = ordersData.map(async order => {
@@ -78,7 +78,7 @@ module.exports.userDetails = (request, response) => {
 									subTotal: result.price * product.quantity
 								};
 								return productDetails;
-							}).catch(error => response.send(error));
+							}).catch(error => response.send(false));
 							return orderedProduct;
 						});
 
@@ -101,12 +101,12 @@ module.exports.userDetails = (request, response) => {
 				return response.send(resultReturn);
 			}
 			else {
-				return response.send(`User ${userData.email} is not found.`);
+				return response.send(false);
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 	}
 	else {
-		return response.send("Users only! You don't have access to this route.");
+		return response.send(false);
 	}
 }
 
@@ -118,14 +118,14 @@ module.exports.setUserAsAdmin = (request, response) => {
 		User.findOneAndUpdate({email: email}, {isAdmin: true})
 		.then(result => {
 			if (result) {
-				return response.send(`User ${email} is now an admin.`);
+				return response.send(true);
 			}
 			else {
-				return response.send(`User ${email} not found.`);
+				return response.send(false);
 			}
-		}).catch(error => response.send(error));
+		}).catch(error => response.send(false));
 	}
 	else {
-		return response.send("Admin Only! You don't have access to this route.");
+		return response.send(false);
 	}
 }
