@@ -13,6 +13,14 @@ const productSchema = new mongoose.Schema({
 		type: Number,
 		required: [true, "Product price is required!"]
 	},
+	category: {
+		type: String,
+		required: [true, "Product category is required!"]
+	},
+	clip: {
+		type: String,
+		required: [true, "Product clip is required!"]
+	},
 	isActive: {
 		type: Boolean,
 		default: true

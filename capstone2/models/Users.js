@@ -9,6 +9,18 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: [true, "User password is required!"]
 	},
+	firstName: {
+		type: String,
+		required: [true, "User first name is required!"]
+	},
+	lastName: {
+		type: String,
+		required: [true, "User last name is required!"]
+	},
+	mobileNumber: {
+		type: String,
+		required: [true, "User number is required!"]
+	},
 	isAdmin: {
 		type: Boolean,
 		default: false

@@ -77,7 +77,9 @@ module.exports.addProduct = (request, response) => {
 		new Product({
 			name: request.body.name,
 			description: request.body.description,
-			price: request.body.price
+			price: request.body.price,
+			category: request.body.category,
+			clip: request.body.clip
 		}).save().then(saved => response.send(true))
 		.catch(error => response.send(false));
 	}
@@ -93,7 +95,9 @@ module.exports.updateProduct = (request, response) => {
 		Product.findByIdAndUpdate(productId, {
 			name: request.body.name,
 			description: request.body.description,
-			price: request.body.price
+			price: request.body.price,
+			category: request.body.category,
+			clip: request.body.clip
 		}).then(result => response.send(true))
 		.catch(error => response.send(false));
 	}
