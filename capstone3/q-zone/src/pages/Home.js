@@ -9,13 +9,15 @@ import UserContext from '../AppContext.js';
 export default function Home() {
 
 	const {user} = useContext(UserContext);
-	const [products, setProducts] = useState([]);
+	const [movies, setMovies] = useState([]);
+	const [series, setSeries] = useState([]);
+	const [games, setGames] = useState([]);
 	
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (user.isAdmin == 'true' || user.isAdmin == true) {
-			navigate('/products');
+			navigate('/products/0');
 		}
 
 		fetch(`${process.env.REACT_APP_API_URL}/products/getActiveProducts`, {
@@ -25,13 +27,25 @@ export default function Home() {
 			}
 		}).then(result => result.json())
 		.then(data => {
-			console.log(data);
 			if (data) {
-				setProducts(data.map(product => {
-					return(
-						<ProductCard key={product._id} productProp={product} />
-					);
-				}));
+				setMovies([]);
+				setSeries([]);
+				setGames([]);
+				let m = 0, s = 0, g = 0;
+				data.reverse().forEach(product => {
+					if (product.category === 'Movie' && m < 3) {
+						setMovies(oldArray => [...oldArray, <ProductCard key={product._id} productProp={product} />]);
+						m++;
+					}
+					else if (product.category === 'Series' && s < 3) {
+						setSeries(oldArray => [...oldArray, <ProductCard key={product._id} productProp={product} />]);
+						s++;
+					}
+					else if (product.category === 'Game' && g < 3) {
+						setGames(oldArray => [...oldArray, <ProductCard key={product._id} productProp={product} />]);
+						g++;
+					}
+				});
 			}
 		}).catch(error => console.log(error));
 	}, []);
@@ -39,18 +53,18 @@ export default function Home() {
 	return(
 		<Container className="text-light">
 			<Row className="mt-5">
-				<h1 className="mb-3">Latest Movies</h1>
-				{products}
-				<Link to='/movies' className="mt-3 text-warning"><h5>See More</h5></Link>
+				<h1 className="mb-4 text-center">Latest Movies</h1>
+				{movies}
+				<Link to='/movies' className="mt-3 mb-2 text-warning"><h5>See More</h5></Link>
 			</Row>
 			<Row className="mt-5">
-				<h1 className="mb-3">Latest Series</h1>
-				{products}
+				<h1 className="mb-4 text-center">Latest Series</h1>
+				{series}
 				<Link to='/series' className="mt-3 text-warning"><h5>See More</h5></Link>
 			</Row>
 			<Row className="my-5">
-				<h1 className="mb-3">Latest Games</h1>
-				{products}
+				<h1 className="mb-4 text-center">Latest Games</h1>
+				{games}
 				<Link to='/games' className="mt-3 text-warning"><h5>See More</h5></Link>
 			</Row>
 		</Container>

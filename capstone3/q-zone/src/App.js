@@ -38,13 +38,13 @@ function App() {
         <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
         <AppNavBar />
         <Routes>
-          <Route path='/login'      element={<Login/>}      />
-          <Route path='/logout'     element={<Logout/>}     />
-          <Route path='/register'   element={<Register/>}   />
-          <Route path='addProduct'  element={<AddProduct/>} />
-          <Route path='/products'   element={<Products/>}   />
-          <Route path='/'           element={<Home/>}       />
-          <Route path='*'           element={<NotFound/>}   />
+          <Route path='/login'            element={<Login/>}      />
+          <Route path='/logout'           element={<Logout/>}     />
+          <Route path='/register'         element={<Register/>}   />
+          <Route path='addProduct'        element={<AddProduct/>} />
+          <Route path='/products/:index'  element={<Products/>}   />
+          <Route path='/'                 element={<Home/>}       />
+          <Route path='*'                 element={<NotFound/>}   />
         </Routes>
       </BrowserRouter>
     </UserProvider>

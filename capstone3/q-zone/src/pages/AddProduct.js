@@ -25,7 +25,8 @@ export default function AddProduct() {
 		}
 
 		if (name === '' || description === '' || price === ''
-			|| clip === '' || category === 'Select category') {
+			|| clip === '' || category === 'Select category'
+			|| price > 999999) {
 			setIsDisabled(true);
 		}
 		else {
@@ -59,6 +60,11 @@ export default function AddProduct() {
 					color: 'black',
 					background: '#fff url(https://img.freepik.com/free-vector/hand-drawn-international-cat-day-background-with-cats_23-2149454620.jpg)'
 				});
+				setName('');
+				setDescription('');
+				setPrice('');
+				setCategory('Select category');
+				setClip('');
 			}
 			else {
 				Swal2.fire({
@@ -77,19 +83,21 @@ export default function AddProduct() {
 			<Row>
 				<Col className="col-12 col-md-6 mx-auto mb-4 text-light">
 					<h1 className="my-5 text-center text-info">Add Product</h1>
-					<Form onSubmit={event => addProduct(event)}>
+					<Form onSubmit={event => addProduct(event)} id="add-product-form">
 						<Form.Group className="mb-3" controlId="formBasicName">
 					    	<Form.Label>Product Name</Form.Label>
 					    	<Form.Control type="text" value={name} 
 					        	onChange={event => setName(event.target.value)} 
-					        	placeholder="Enter product name." />
+					        	placeholder="Enter product name." 
+					        	maxLength={50} />
 						</Form.Group>
 
 						<Form.Group className="mb-3" controlId="formBasicDescription">
-					    	<Form.Label>Product Description</Form.Label>
+					    	<Form.Label>Product Description (Max 100 chars.)</Form.Label>
 					    	<Form.Control type="text" value={description} 
 					        	onChange={event => setDescription(event.target.value)} 
-					        	placeholder="Enter product description." />
+					        	placeholder="Enter product description." 
+					        	maxLength={100} />
 						</Form.Group>
 
 						<Form.Group className="mb-3" controlId="formBasicPrice">

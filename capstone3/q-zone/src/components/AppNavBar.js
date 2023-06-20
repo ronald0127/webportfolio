@@ -29,7 +29,7 @@ export default function AppNavBar() {
 			    	{
 			    		user.isAdmin == 'true' || user.isAdmin == true ?
 			    		<>
-			    			<Nav.Link as={NavLink} to="/products"><h5>Products</h5></Nav.Link>
+			    			<Nav.Link as={NavLink} to="/products/0"><h5>Products</h5></Nav.Link>
 			    		</>
 			    		:
 			    		<>

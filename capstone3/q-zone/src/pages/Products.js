@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from 'react';
 import {Container, Row, Form, InputGroup} from 'react-bootstrap';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 
 import ProductCard from '../components/ProductCard.js';
 import UserContext from '../AppContext.js';
@@ -9,6 +9,8 @@ import UserContext from '../AppContext.js';
 export default function Products() {
 
 	const {user} = useContext(UserContext);
+	const {index} = useParams();
+
 	const [products, setProducts] = useState([]);
 	const [productsData, setProductsData] = useState([]);
 
@@ -24,10 +26,9 @@ export default function Products() {
 			}
 		}).then(result => result.json())
 		.then(data => {
-			console.log(data);
 			if (data) {
 				setProductsData(data);
-				setProducts(data.map(product => {
+				setProducts(data.reverse().map(product => {
 					return(
 						<ProductCard key={product._id} productProp={product} />
 					);
@@ -35,6 +36,29 @@ export default function Products() {
 			}
 		}).catch(error => console.log(error));
 	}, []);
+
+	const PreviousLink = () => {
+		let prevClassName = "text-warning fw-bolder mt-3";
+		if (products.length > (Number(index) + 5)) {
+			prevClassName = "text-warning fw-bolder mt-3 me-5";
+		}
+
+		return(
+			Number(index) >= 5 ? 
+			<Link to={'/products/' + (Number(index) - 5)} className={prevClassName}>Previous</Link>
+			:
+			<></>
+		);
+	}
+
+	const NextLink = () => {
+		return(
+			products.length > (Number(index) + 5) ?
+			<Link to={'/products/' + (Number(index) + 5)} className="text-warning fw-bolder mt-3">Next</Link>
+			:
+			<></>
+		);
+	}
 
 	return(
 		<Container>
@@ -50,7 +74,15 @@ export default function Products() {
 				    	placeholder="Type product ID or name to search product."
 					/>
 				</InputGroup>
-				{products}
+				{products.length > Number(index) ? products[Number(index)] : <></>}
+				{products.length > (Number(index) + 1) ? products[Number(index) + 1] : <></>}
+				{products.length > (Number(index) + 2) ? products[Number(index) + 2] : <></>}
+				{products.length > (Number(index) + 3) ? products[Number(index) + 3] : <></>}
+				{products.length > (Number(index) + 4) ? products[Number(index) + 4] : <></>}
+				<div className="d-flex justify-content-end">
+					<PreviousLink />
+					<NextLink />
+				</div>
 			</Row>
 		</Container>
 	);
