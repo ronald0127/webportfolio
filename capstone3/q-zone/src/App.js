@@ -14,6 +14,7 @@ import Login from './pages/Login.js';
 import Register from './pages/Register.js';
 import Home from './pages/Home.js';
 import AddProduct from './pages/AddProduct.js';
+import Products from './pages/Products.js';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
           <Route path='/logout'     element={<Logout/>}     />
           <Route path='/register'   element={<Register/>}   />
           <Route path='addProduct'  element={<AddProduct/>} />
+          <Route path='/products'   element={<Products/>}   />
           <Route path='/'           element={<Home/>}       />
           <Route path='*'           element={<NotFound/>}   />
         </Routes>

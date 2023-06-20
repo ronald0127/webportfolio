@@ -67,7 +67,7 @@ export default function AddProduct() {
 					html: 'There seems to be a<br>problem right now.<br>Try again later.',
 					color: 'black',
 					background: '#fff url(https://img.freepik.com/free-vector/hand-drawn-international-cat-day-background-with-cats_23-2149454620.jpg)'
-				})
+				});
 			}
 		}).catch(error => console.log(error));
 	}
