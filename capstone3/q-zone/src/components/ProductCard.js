@@ -1,4 +1,4 @@
-import {React, useContext} from 'react';
+import {React, useContext, useState, useEffect} from 'react';
 import {Col, Card, Button} from 'react-bootstrap';
 import {Link, useNavigate} from 'react-router-dom';
 
@@ -8,10 +8,13 @@ import Swal2 from 'sweetalert2';
 
 export default function ProductCard(props) {
 
-	const navigate = useNavigate();
+	const navigate = useNavigate();	
 
 	const {user} = useContext(UserContext);
-	const {_id, name, description, price, category, clip, isActive} = props.productProp;
+	const {index, _id, name, description, price, category, clip, isActive} = props.productProp;
+
+	const [isActiveLocal, setIsActiveLocal] = useState(isActive);
+
 
 	let layout = 'col-12 col-md-4';
 	let cardHeight = 'my-2 bg-dark h-100';
@@ -26,20 +29,20 @@ export default function ProductCard(props) {
 			<div className="d-flex flex-row">
 				<Button className="bg-info text-dark" onClick={() => update()}>Update</Button>
 				<div className="offset-9 col-3">
-					<Button className="bg-success ms-5 me-2" onClick={() => activate()} disabled={isActive}>Activate</Button>
-					<Button className="bg-danger mx-3" onClick={() => archive()} disabled={!isActive}>Archive</Button>
+					<Button className="bg-success ms-5 me-2" onClick={() => activate()} disabled={isActiveLocal}>Activate</Button>
+					<Button className="bg-danger mx-3" onClick={() => archive()} disabled={!isActiveLocal}>Archive</Button>
 				</div>
 			</div>
 			:
 			<div className="d-flex justify-content-end">
-				<Button className="bg-success" as={Link} to='/games'>Details</Button>
+				<Button className="bg-success" as={Link} to={`/prodView/${_id}`}>Details</Button>
 			</div>
 		);
 	}
 
 	const Status = () => {
 		return(
-			isActive ? 
+			isActiveLocal ? 
 			<h6 style={{color: "#03fc39"}}>Active</h6>
 			:
 			<h6 className="text-danger">Inactive</h6>
@@ -47,7 +50,7 @@ export default function ProductCard(props) {
 	}
 
 	function update() {
-
+		navigate(`/updateProduct/${index}/${_id}`);
 	}
 
 	function activate() {
@@ -66,7 +69,8 @@ export default function ProductCard(props) {
 					color: 'black',
 					background: '#fff url(https://img.freepik.com/free-vector/hand-drawn-international-cat-day-background-with-cats_23-2149454620.jpg)'
 				});
-				navigate('/');
+				setIsActiveLocal(true);
+				isActive = true;
 			}
 			else {
 				Swal2.fire({
@@ -96,7 +100,8 @@ export default function ProductCard(props) {
 					color: 'black',
 					background: '#fff url(https://img.freepik.com/free-vector/hand-drawn-international-cat-day-background-with-cats_23-2149454620.jpg)'
 				});
-				navigate('/');
+				setIsActiveLocal(false);
+				isActive = false;
 			}
 			else {
 				Swal2.fire({

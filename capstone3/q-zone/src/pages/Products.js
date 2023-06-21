@@ -1,6 +1,6 @@
 import {useContext, useEffect, useState} from 'react';
 import {Container, Row, Form, InputGroup} from 'react-bootstrap';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useParams, useNavigate} from 'react-router-dom';
 
 import ProductCard from '../components/ProductCard.js';
 import UserContext from '../AppContext.js';
@@ -11,8 +11,11 @@ export default function Products() {
 	const {user} = useContext(UserContext);
 	const {index} = useParams();
 
+	const navigate = useNavigate();
+
 	const [products, setProducts] = useState([]);
 	const [productsData, setProductsData] = useState([]);
+	const [dataList, setDataList] = useState([])
 
 	useEffect(() => {
 		if (user.isAdmin == false || user.isAdmin == 'false' || user.isAdmin == null) {
@@ -27,15 +30,25 @@ export default function Products() {
 		}).then(result => result.json())
 		.then(data => {
 			if (data) {
-				setProductsData(data);
+				setDataList([]);
+				setProducts([]);
+				setProductsData([]);
+
+				setDataList(data);
 				setProducts(data.reverse().map(product => {
+					product.index = index;
 					return(
-						<ProductCard key={product._id} productProp={product} />
+						<ProductCard key={product._id} productProp={product} id={product._id}/>
+					);
+				}));
+				setProductsData(data.map(product => {
+					return(
+						<option value={product._id}>{product.name}</option>
 					);
 				}));
 			}
 		}).catch(error => console.log(error));
-	}, []);
+	}, [index]);
 
 	const PreviousLink = () => {
 		let prevClassName = "text-warning fw-bolder mt-3";
@@ -60,6 +73,23 @@ export default function Products() {
 		);
 	}
 
+	function searchProduct(event) {
+		if (event.key === 'Enter') {
+			const lookForID = event.target.value;
+			let indexToNavigate = 0;
+			for (let i = 0; i < dataList.length; i++) {
+				if (lookForID == dataList[i]._id) {
+					indexToNavigate = i;
+					break;
+				}
+			}
+			indexToNavigate = Math.floor(indexToNavigate / 5);
+			console.log(indexToNavigate);
+			navigate(`/products/${indexToNavigate*5}`);
+			event.target.value = '';
+		}
+	}
+
 	return(
 		<Container>
 			<Row className="my-5 text-light">
@@ -72,7 +102,12 @@ export default function Products() {
 				    	aria-label="Default"
 				    	aria-describedby="inputGroup-sizing-default"
 				    	placeholder="Type product ID or name to search product."
+				    	onKeyPress={event => searchProduct(event)}
+				    	list="productNamesAndIds"
 					/>
+					<datalist id="productNamesAndIds">
+						{productsData}
+					</datalist>
 				</InputGroup>
 				{products.length > Number(index) ? products[Number(index)] : <></>}
 				{products.length > (Number(index) + 1) ? products[Number(index) + 1] : <></>}

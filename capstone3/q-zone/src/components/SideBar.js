@@ -33,9 +33,6 @@ export default function SideBar() {
 				<Link className="menu-item" to="/addProduct">
 					Add Products
 				</Link>
-				<Link className="menu-item" to="/updateProduct">
-					Update Products
-				</Link>
 				<Link className="menu-item" to="/setAdmin">
 					Set User as Admin
 				</Link>

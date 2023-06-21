@@ -14,6 +14,7 @@ import Login from './pages/Login.js';
 import Register from './pages/Register.js';
 import Home from './pages/Home.js';
 import AddProduct from './pages/AddProduct.js';
+import UpdateProduct from './pages/UpdateProd.js';
 import Products from './pages/Products.js';
 
 
@@ -38,13 +39,14 @@ function App() {
         <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
         <AppNavBar />
         <Routes>
-          <Route path='/login'            element={<Login/>}      />
-          <Route path='/logout'           element={<Logout/>}     />
-          <Route path='/register'         element={<Register/>}   />
-          <Route path='addProduct'        element={<AddProduct/>} />
-          <Route path='/products/:index'  element={<Products/>}   />
-          <Route path='/'                 element={<Home/>}       />
-          <Route path='*'                 element={<NotFound/>}   />
+          <Route path='/login'                        element={<Login/>}          />
+          <Route path='/logout'                       element={<Logout/>}         />
+          <Route path='/register'                     element={<Register/>}       />
+          <Route path='/addProduct'                   element={<AddProduct/>}     />
+          <Route path='/updateProduct/:index/:prodId' element={<UpdateProduct/>}  />
+          <Route path='/products/:index'              element={<Products/>}       />
+          <Route path='/'                             element={<Home/>}           />
+          <Route path='*'                             element={<NotFound/>}       />
         </Routes>
       </BrowserRouter>
     </UserProvider>
