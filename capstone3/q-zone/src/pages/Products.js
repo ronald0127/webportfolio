@@ -84,7 +84,7 @@ export default function Products() {
 				}
 			}
 			indexToNavigate = Math.floor(indexToNavigate / 5);
-			console.log(indexToNavigate);
+			// console.log(indexToNavigate);
 			navigate(`/products/${indexToNavigate*5}`);
 			event.target.value = '';
 		}
