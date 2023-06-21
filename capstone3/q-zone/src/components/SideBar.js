@@ -21,9 +21,6 @@ export default function SideBar() {
 				<Link className="menu-item" to="/cart">
 					Cart
 				</Link>
-				<Link className="menu-item" to="/checkout">
-					Checkout
-				</Link>
 				<Link className="menu-item" to="/orders">
 					Orders
 				</Link>

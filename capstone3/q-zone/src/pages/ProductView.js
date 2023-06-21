@@ -18,6 +18,8 @@ export default function ProductView() {
 	const [category, setCategory] = useState('');
 	const [clip, setClip] = useState('');
 	const [goBackLink, setGoBackLink] = useState('');
+	const [quantity, setQuantity] = useState(1);
+	const [subTotal, setSubTotal] = useState(0);
 
 
 	useEffect(() => {
@@ -34,6 +36,7 @@ export default function ProductView() {
 				setPrice(data.productDetails.price);
 				setCategory(data.productDetails.category);
 				setClip(data.productDetails.clip);
+				setQuantity(1);
 
 				switch(data.productDetails.category) {
 					case 'Movie':
@@ -53,6 +56,17 @@ export default function ProductView() {
 		}).catch(error => console.log(error));
 	}, []);
 
+	function buyMultiple() {
+
+	}
+
+	function buyOne() {
+
+	}
+
+	function rent() {
+
+	}
 
 	return(
 		<Container>
@@ -67,9 +81,38 @@ export default function ProductView() {
 					    	<Card.Title>Category:</Card.Title>
 					    	<Card.Text className="border-bottom border-2 border-danger pb-4">{category}</Card.Text>
 					    	<div className="d-flex flex-row py-3">
-								<Button className="bg-info text-dark fw-bold p-3">Buy for PHP {price}</Button>
-								<Button className="bg-info text-dark fw-bold p-3 ms-4">Rent for PHP {price/5}</Button>
-							</div>
+					    	{
+					    		category === 'Movie' || category === 'Series' ?
+					    		<>
+					    			<Button className="bg-info text-dark fw-bold p-3" onClick={() => buyOne()}>
+					    				Buy for PhP {price}
+					    			</Button>
+					    			<Button className="bg-info text-dark fw-bold p-3 ms-4" onClick={() => rent()}>
+					    				Rent for PhP {price/5}
+					    			</Button>
+					    		</>
+					    		:
+					    		<>
+					    			<Button className="bg-info text-dark fw-bold p-3" onClick={() => buyMultiple()}>
+					    				Buy for PhP {price}
+					    			</Button>
+					    			<select onChange={event => setQuantity(event.target.value)}
+					    				className="fw-bold ms-1 ms-md-3 border border-5 border-success">
+					    				<option defaultValue disabled className="fw-bold">Select Quantity</option>
+					    				<option value="1">1 Pc.</option>
+					    			    <option value="2">2 Pcs.</option>
+					    				<option value="3">3 Pcs.</option>
+					    				<option value="4">4 Pcs.</option>
+					    			    <option value="5">5 Pcs.</option>
+					    			    <option value="6">6 Pcs.</option>
+					    			    <option value="7">7 Pcs.</option>
+					    			    <option value="8">8 Pcs.</option>
+					    			    <option value="9">9 Pcs.</option>
+					    			    <option value="10">10 Pcs.</option>
+									</select>
+					    		</>
+					    	}
+					    	</div>
 						</Card.Body>
 					</Card>
 					<div className="d-flex flex-row justify-content-center">

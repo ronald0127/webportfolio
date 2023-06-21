@@ -37,7 +37,7 @@ export default function Movies() {
 				});
 			}
 		}).catch(error => console.log(error));
-	}, []);
+	}, [index]);
 
 	const PreviousLink = () => {
 		return(
