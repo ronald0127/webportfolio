@@ -97,7 +97,7 @@ export default function AddProduct() {
 					    	<Form.Control type="text" value={description} 
 					        	onChange={event => setDescription(event.target.value)} 
 					        	placeholder="Enter product description." 
-					        	maxLength={100} />
+					        	maxLength={200} />
 						</Form.Group>
 
 						<Form.Group className="mb-3" controlId="formBasicPrice">

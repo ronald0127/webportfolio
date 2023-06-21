@@ -16,7 +16,7 @@ export default function ProductCard(props) {
 	const [isActiveLocal, setIsActiveLocal] = useState(isActive);
 
 
-	let layout = 'col-12 col-md-4';
+	let layout = 'my-2 col-12 col-lg-4';
 	let cardHeight = 'my-2 bg-dark h-100';
 	if (user.isAdmin != null && (user.isAdmin == 'true' || user.isAdmin == true)) {
 		layout = 'col-12';
@@ -27,15 +27,15 @@ export default function ProductCard(props) {
 		return(
 			user.isAdmin == true || user.isAdmin == 'true' ?
 			<div className="d-flex flex-row">
-				<Button className="bg-info text-dark" onClick={() => update()}>Update</Button>
-				<div className="offset-9 col-3">
-					<Button className="bg-success ms-5 me-2" onClick={() => activate()} disabled={isActiveLocal}>Activate</Button>
-					<Button className="bg-danger mx-3" onClick={() => archive()} disabled={!isActiveLocal}>Archive</Button>
+				<Button className="bg-info text-dark px-3" onClick={() => update()}>Update</Button>
+				<div className="ms-auto">
+					<Button className="bg-success me-3 px-3" onClick={() => activate()} disabled={isActiveLocal}>Activate</Button>
+					<Button className="bg-danger px-3" onClick={() => archive()} disabled={!isActiveLocal}>Archive</Button>
 				</div>
 			</div>
 			:
 			<div className="d-flex justify-content-end">
-				<Button className="bg-success" as={Link} to={`/prodView/${_id}`}>Details</Button>
+				<Button className="bg-success" as={Link} to={`/prodView/${index}/${_id}`}>Details</Button>
 			</div>
 		);
 	}
@@ -70,7 +70,6 @@ export default function ProductCard(props) {
 					background: '#fff url(https://img.freepik.com/free-vector/hand-drawn-international-cat-day-background-with-cats_23-2149454620.jpg)'
 				});
 				setIsActiveLocal(true);
-				isActive = true;
 			}
 			else {
 				Swal2.fire({
@@ -101,7 +100,6 @@ export default function ProductCard(props) {
 					background: '#fff url(https://img.freepik.com/free-vector/hand-drawn-international-cat-day-background-with-cats_23-2149454620.jpg)'
 				});
 				setIsActiveLocal(false);
-				isActive = false;
 			}
 			else {
 				Swal2.fire({
@@ -132,15 +130,17 @@ export default function ProductCard(props) {
 			        <Card.Text>{category}</Card.Text>
 			        <Card.Subtitle>Price:</Card.Subtitle>
 			        <Card.Text>PHP {price}</Card.Text>
-			        {
-			        	user.id !== null ?
-			        	<ButtonAdmin />
-			        	:
-			        	<div className="d-flex justify-content-end">
-			        		<Button className="bg-success" as={Link} to='/login'>Learn More</Button>
-			        	</div>
-			        }
 				</Card.Body>
+				<div className="m-3">
+				{
+					user.id !== null ?
+					<ButtonAdmin />
+					:
+					<div className="d-flex justify-content-end">
+						<Button className="bg-success" as={Link} to='/login'>Learn More</Button>
+					</div>
+				}
+				</div>
 			</Card>
 		</Col>
 	);

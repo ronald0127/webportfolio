@@ -115,7 +115,7 @@ export default function UpdateProduct() {
 					    	<Form.Control type="text" value={description} 
 					        	onChange={event => setDescription(event.target.value)} 
 					        	placeholder="Enter product description." 
-					        	maxLength={100} />
+					        	maxLength={200} />
 						</Form.Group>
 
 						<Form.Group className="mb-3" controlId="formBasicPrice">
@@ -145,14 +145,16 @@ export default function UpdateProduct() {
 					        <YoutubeEmbed embedId={clip} />
 						</Form.Group>
 
-						<Button variant="primary" type="submit" disabled={isDisabled} 
-					    	className="my-5 px-4 bg-info text-dark fw-bold">
-					    		Update
-					    </Button>
-					    <Button as={HashLink} smooth to={`/products/${index}/#${prodId}`}
-					    	className="mx-5 px-4 bg-info text-dark fw-bold">
-					    		Go Back
-						</Button>
+						<div className="d-flex flex-row">
+							<Button variant="primary" type="submit" disabled={isDisabled} 
+					    		className="my-5 px-4 bg-info text-dark fw-bold">
+					    			Update
+					    	</Button>
+					    	<Button as={HashLink} smooth to={`/products/${index}/#${prodId}`}
+					        	className="ms-auto my-5 px-4 bg-info text-dark fw-bold">
+					        		Go Back
+					    	</Button>
+					    </div>
 					</Form>
 				</Col>
 			</Row>

@@ -34,9 +34,9 @@ export default function AppNavBar() {
 			    		:
 			    		<>
 			    			<Nav.Link as={NavLink} to="/"><h5>Home</h5></Nav.Link>
-			    			<Nav.Link as={NavLink} to="/movies" className="d-none d-sm-flex"><h5>Movies</h5></Nav.Link>
-			    			<Nav.Link as={NavLink} to="/series" className="d-none d-sm-flex"><h5>Series</h5></Nav.Link>
-			    			<Nav.Link as={NavLink} to="/games" className="d-none d-sm-flex"><h5>Games</h5></Nav.Link>
+			    			<Nav.Link as={NavLink} to="/movies/0" className="d-none d-sm-flex"><h5>Movies</h5></Nav.Link>
+			    			<Nav.Link as={NavLink} to="/series/0" className="d-none d-sm-flex"><h5>Series</h5></Nav.Link>
+			    			<Nav.Link as={NavLink} to="/games/0" className="d-none d-sm-flex"><h5>Games</h5></Nav.Link>
 			    		</>
 			    	}
 					{

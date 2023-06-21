@@ -55,17 +55,17 @@ export default function Home() {
 			<Row className="mt-5">
 				<h1 className="mb-4 text-center">Latest Movies</h1>
 				{movies}
-				<Link to='/movies' className="mt-3 mb-2 text-warning"><h5>See More</h5></Link>
+				<Link to='/movies/0' className="mt-3 mb-2 text-warning"><h5>See More</h5></Link>
 			</Row>
 			<Row className="mt-5">
 				<h1 className="mb-4 text-center">Latest Series</h1>
 				{series}
-				<Link to='/series' className="mt-3 text-warning"><h5>See More</h5></Link>
+				<Link to='/series/0' className="mt-3 text-warning"><h5>See More</h5></Link>
 			</Row>
 			<Row className="my-5">
 				<h1 className="mb-4 text-center">Latest Games</h1>
 				{games}
-				<Link to='/games' className="mt-3 text-warning"><h5>See More</h5></Link>
+				<Link to='/games/0' className="mt-3 text-warning"><h5>See More</h5></Link>
 			</Row>
 		</Container>
 	);

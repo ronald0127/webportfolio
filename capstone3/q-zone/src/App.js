@@ -16,6 +16,9 @@ import Home from './pages/Home.js';
 import AddProduct from './pages/AddProduct.js';
 import UpdateProduct from './pages/UpdateProd.js';
 import Products from './pages/Products.js';
+import Movies from './pages/Movies.js';
+import Series from './pages/Series.js';
+import Games from './pages/Games.js';
 
 
 function App() {
@@ -45,6 +48,9 @@ function App() {
           <Route path='/addProduct'                   element={<AddProduct/>}     />
           <Route path='/updateProduct/:index/:prodId' element={<UpdateProduct/>}  />
           <Route path='/products/:index'              element={<Products/>}       />
+          <Route path='/movies/:index'                element={<Movies/>}         />
+          <Route path='/series/:index'                element={<Series/>}         />
+          <Route path='/games/:index'                 element={<Games/>}          />
           <Route path='/'                             element={<Home/>}           />
           <Route path='*'                             element={<NotFound/>}       />
         </Routes>

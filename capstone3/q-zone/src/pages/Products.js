@@ -77,14 +77,15 @@ export default function Products() {
 		if (event.key === 'Enter') {
 			const lookForID = event.target.value;
 			let indexToNavigate = 0;
+			
 			for (let i = 0; i < dataList.length; i++) {
 				if (lookForID == dataList[i]._id) {
 					indexToNavigate = i;
 					break;
 				}
 			}
+
 			indexToNavigate = Math.floor(indexToNavigate / 5);
-			// console.log(indexToNavigate);
 			navigate(`/products/${indexToNavigate*5}`);
 			event.target.value = '';
 		}
