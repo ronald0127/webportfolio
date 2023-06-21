@@ -33,6 +33,7 @@ export default function Home() {
 				setGames([]);
 				let m = 0, s = 0, g = 0;
 				data.reverse().forEach(product => {
+					product.index = 0;
 					if (product.category === 'Movie' && m < 3) {
 						setMovies(oldArray => [...oldArray, <ProductCard key={product._id} productProp={product} />]);
 						m++;

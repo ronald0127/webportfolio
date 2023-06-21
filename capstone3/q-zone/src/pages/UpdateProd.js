@@ -111,7 +111,7 @@ export default function UpdateProduct() {
 						</Form.Group>
 
 						<Form.Group className="mb-3" controlId="formBasicDescription">
-					    	<Form.Label>Product Description (Max 100 chars.)</Form.Label>
+					    	<Form.Label>Product Description (Max 200 chars.)</Form.Label>
 					    	<Form.Control type="text" value={description} 
 					        	onChange={event => setDescription(event.target.value)} 
 					        	placeholder="Enter product description." 
