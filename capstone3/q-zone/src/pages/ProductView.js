@@ -2,6 +2,9 @@ import {Container, Row, Col, Card, Button} from 'react-bootstrap';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {useEffect, useContext, useState} from 'react';
 
+import React from 'react';
+import {ToastContainer, toast} from 'react-toastify';
+
 import UserContext from '../AppContext.js';
 import YoutubeEmbed from '../components/YoutubeEmbed.js';
 
@@ -19,7 +22,9 @@ export default function ProductView() {
 	const [clip, setClip] = useState('');
 	const [goBackLink, setGoBackLink] = useState('');
 	const [quantity, setQuantity] = useState(1);
-	const [subTotal, setSubTotal] = useState(0);
+
+	const buy = 'buy';
+	const rent = 'rent';
 
 
 	useEffect(() => {
@@ -56,16 +61,17 @@ export default function ProductView() {
 		}).catch(error => console.log(error));
 	}, []);
 
-	function buyMultiple() {
+	function sendToCart(orderType) {
+		const orderMsg = orderType == 'buy' ? 'purchase' : 'rent';
+		const order = [orderType, quantity];
+		localStorage.setItem(prodId, order);
 
-	}
-
-	function buyOne() {
-
-	}
-
-	function rent() {
-
+		toast.success(`${category}: ${name} was successfully added to your cart for ${orderMsg}. Thank you!`, {
+      		position: toast.POSITION.TOP_RIGHT,
+      		autoClose: 10000,
+      		className: 'toast-message'
+    	});
+    	toast.info('New item found in cart!');
 	}
 
 	return(
@@ -84,16 +90,18 @@ export default function ProductView() {
 					    	{
 					    		category === 'Movie' || category === 'Series' ?
 					    		<>
-					    			<Button className="bg-info text-dark fw-bold p-3" onClick={() => buyOne()}>
-					    				Buy for PhP {price}
+					    			<Button className="bg-info text-dark fw-bold p-3" 
+					    				onClick={() => sendToCart(buy)}>
+					    					Buy for PhP {price}
 					    			</Button>
-					    			<Button className="bg-info text-dark fw-bold p-3 ms-4" onClick={() => rent()}>
-					    				Rent for PhP {price/5}
+					    			<Button className="bg-info text-dark fw-bold p-3 ms-4" 
+					    				onClick={() => sendToCart(rent)}>
+					    					Rent for PhP {price/5}
 					    			</Button>
 					    		</>
 					    		:
 					    		<>
-					    			<Button className="bg-info text-dark fw-bold p-3" onClick={() => buyMultiple()}>
+					    			<Button className="bg-info text-dark fw-bold p-3" onClick={() => sendToCart(buy)}>
 					    				Buy for PhP {price}
 					    			</Button>
 					    			<select onChange={event => setQuantity(event.target.value)}
@@ -118,6 +126,7 @@ export default function ProductView() {
 					<div className="d-flex flex-row justify-content-center">
 						<Link to={goBackLink} className="text-warning fw-bolder">Go Back</Link>
 					</div>
+					<ToastContainer />
 				</Col>
 			</Row>
 		</Container>

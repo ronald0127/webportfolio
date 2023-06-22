@@ -11,6 +11,12 @@
   font-family: 'Lilita One', cursive;
 }
 
+.toast-message {
+  font-size: 17px;
+  padding: 50px 20px;
+  font-family: 'Lilita One', cursive;
+}
+
 
 /* ---------- Burger Menu Styles (START) ---------- */
 /* Position and sizing of burger button */
@@ -113,3 +119,44 @@
   position: absolute;
 }
 /* ---------- Youtube Embed CSS (END) ---------- */
+
+/* ---------- Visa and MasterCard Selector (START) ---------- */
+.cc-selector input{
+    margin:5px;padding:5px;
+    -webkit-appearance:none;
+       -moz-appearance:none;
+            appearance:none;
+}
+.visa{background-image:url(http://i.imgur.com/lXzJ1eB.png);}
+.mastercard{background-image:url(http://i.imgur.com/SJbRQF7.png);}
+
+.cc-selector input:active +.drinkcard-cc{opacity: .5;}
+.cc-selector input:checked +.drinkcard-cc{
+    -webkit-filter: none;
+       -moz-filter: none;
+            filter: none;
+}
+.drinkcard-cc{
+    cursor:pointer;
+    background-size:contain;
+    background-repeat:no-repeat;
+    display:inline-block;
+    width:100px;height:70px;
+    -webkit-transition: all 100ms ease-in;
+       -moz-transition: all 100ms ease-in;
+            transition: all 100ms ease-in;
+    -webkit-filter: brightness(1.8) grayscale(1) opacity(.7);
+       -moz-filter: brightness(1.8) grayscale(1) opacity(.7);
+            filter: brightness(1.8) grayscale(1) opacity(.7);
+}
+.drinkcard-cc:hover{
+    -webkit-filter: brightness(1.2) grayscale(.5) opacity(.9);
+       -moz-filter: brightness(1.2) grayscale(.5) opacity(.9);
+            filter: brightness(1.2) grayscale(.5) opacity(.9);
+}
+
+/* Extras */
+a:visited{color:#888}
+a{color:#999;text-decoration:none;}
+p{margin-bottom:.3em;}
+/* ---------- Visa and MasterCard Selector (END) ---------- */

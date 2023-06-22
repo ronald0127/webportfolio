@@ -26,34 +26,41 @@ module.exports.createOrder = async (request, response) => {
 		return response.send(false);
 	}
 	else {
-		const orderedProducts = request.body.orderedProducts;
+		new Order({
+			userId: userData.id,
+			totalAmount: request.body.totalAmount,
+			products: request.body.orderedProducts
+		}).save().then(result => response.send(true))
+		.catch(error => response.send(false));
+
+		// const orderedProducts = request.body.orderedProducts;
 		// Compute total amount of ordered products.
-		const promises = orderedProducts.map(async product => {
-			const subTotal = await Product.findById(product.productId).then(result => {
-				if (!result.isActive) {
-					return result.isActive;
-				}
-				else {
-					return result.price * product.quantity;
-				}
-			}).catch(error => response.send(false));
-			return subTotal;
-		});
+		// const promises = orderedProducts.map(async product => {
+		// 	const subTotal = await Product.findById(product.productId).then(result => {
+		// 		if (!result.isActive) {
+		// 			return result.isActive;
+		// 		}
+		// 		else {
+		// 			return result.price * product.quantity;
+		// 		}
+		// 	}).catch(error => response.send(false));
+		// 	return subTotal;
+		// });
 
-		const subTotals = await Promise.all(promises);
+		// const subTotals = await Promise.all(promises);
 
-		if (subTotals.includes(false)) {
-			return response.send(false);
-		}
-		else {
-			const total = subTotals.reduce((a, b) => a + b, 0);
-			new Order({
-				userId: userData.id,
-				totalAmount: total,
-				products: orderedProducts
-			}).save().then(result => response.send(true))
-			.catch(error => response.send(false));
-		}
+		// if (subTotals.includes(false)) {
+		// 	return response.send(false);
+		// }
+		// else {
+		// 	const total = subTotals.reduce((a, b) => a + b, 0);
+		// 	new Order({
+		// 		userId: userData.id,
+		// 		totalAmount: total,
+		// 		products: orderedProducts
+		// 	}).save().then(result => response.send(true))
+		// 	.catch(error => response.send(false));
+		// }
 	}
 }
 

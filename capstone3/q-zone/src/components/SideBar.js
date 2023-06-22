@@ -2,7 +2,11 @@ import {React, useContext} from 'react';
 import {slide as Menu} from 'react-burger-menu';
 import {Link} from 'react-router-dom';
 
+import {FaBell} from 'react-icons/fa';
+import {toast} from 'react-toastify';
+
 import UserContext from '../AppContext.js';
+
 
 export default function SideBar() {
 
@@ -18,8 +22,9 @@ export default function SideBar() {
 				<Link className="menu-item" to="/watchlist">
 					My Watchlist
 				</Link>
-				<Link className="menu-item" to="/cart">
+				<Link className="menu-item notification-icon" to="/cart">
 					Cart
+					<FaBell className="ms-2 bg-danger"/>
 				</Link>
 				<Link className="menu-item" to="/orders">
 					Orders

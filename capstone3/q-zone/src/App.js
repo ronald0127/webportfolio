@@ -1,5 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
+
+import React from 'react';
+import {ToastContainer} from 'react-toastify';
 
 import {useState} from 'react';
 import {decryptData} from './crypt.js';
@@ -20,6 +24,7 @@ import Movies from './pages/Movies.js';
 import Series from './pages/Series.js';
 import Games from './pages/Games.js';
 import ProductView from './pages/ProductView.js';
+import Cart from './pages/Cart.js';
 
 
 function App() {
@@ -41,6 +46,7 @@ function App() {
     <UserProvider value={{user, setUser, unsetUser}}>
       <BrowserRouter>
         <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
+        <ToastContainer />
         <AppNavBar />
         <Routes>
           <Route path='/login'                        element={<Login/>}          />
@@ -53,6 +59,7 @@ function App() {
           <Route path='/series/:index'                element={<Series/>}         />
           <Route path='/games/:index'                 element={<Games/>}          />
           <Route path='/prodView/:index/:prodId'      element={<ProductView/>}    />
+          <Route path='/cart'                         element={<Cart/>}           />
           <Route path='/'                             element={<Home/>}           />
           <Route path='*'                             element={<NotFound/>}       />
         </Routes>
