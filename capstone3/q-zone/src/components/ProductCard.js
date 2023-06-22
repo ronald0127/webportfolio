@@ -35,7 +35,7 @@ export default function ProductCard(props) {
 			</div>
 			:
 			<div className="d-flex justify-content-end">
-				<Button className="bg-success" as={Link} to={`/prodView/${index}/${_id}`}>Details</Button>
+				<Button className="bg-success fw-bold" as={Link} to={`/prodView/${index}/${_id}`}>Details</Button>
 			</div>
 		);
 	}
@@ -137,7 +137,7 @@ export default function ProductCard(props) {
 					<ButtonAdmin />
 					:
 					<div className="d-flex justify-content-end">
-						<Button className="bg-success" as={Link} to='/login'>Learn More</Button>
+						<Button className="bg-success fw-bold" as={Link} to='/login'>Learn More</Button>
 					</div>
 				}
 				</div>

@@ -164,7 +164,8 @@ export default function Cart() {
 				isCheckOutItems ?
 				<form className="my-5">
 					<ColoredLine color="red" />
-					<h3 className="my-4">Select Payment Mode</h3>
+					<h3 className="my-5 text-warning fw-bold">CHECKOUT</h3>
+					<p className="my-3">Select Payment Mode</p>
 					<div className="cc-selector">
 				    	<input id="visa" type="radio" name="credit-card" value="visa" />
 						<label className="drinkcard-cc visa" for="visa"></label>

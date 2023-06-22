@@ -90,8 +90,10 @@ module.exports.seeMyOrders = async (request, response) => {
 							productId: result._id,
 							name: result.name,
 							price: result.price,
+							category: result.category,
 							quantity: product.quantity,
-							subTotal: result.price * product.quantity
+							subTotal: product.subTotal,
+							orderType: product.orderType
 						};
 						return productDetails;
 					}).catch(error => response.send(false));

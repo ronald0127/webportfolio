@@ -25,6 +25,7 @@ import Series from './pages/Series.js';
 import Games from './pages/Games.js';
 import ProductView from './pages/ProductView.js';
 import Cart from './pages/Cart.js';
+import Orders from './pages/Orders.js';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <Route path='/games/:index'                 element={<Games/>}          />
           <Route path='/prodView/:index/:prodId'      element={<ProductView/>}    />
           <Route path='/cart'                         element={<Cart/>}           />
+          <Route path='/orders'                       element={<Orders/>}         />
           <Route path='/'                             element={<Home/>}           />
           <Route path='*'                             element={<NotFound/>}       />
         </Routes>
