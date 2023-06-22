@@ -67,11 +67,13 @@ export default function ProductView() {
 		localStorage.setItem(prodId, order);
 
 		toast.success(`${category}: ${name} was successfully added to your cart for ${orderMsg}. Thank you!`, {
-      		position: toast.POSITION.TOP_RIGHT,
-      		autoClose: 10000,
+      		position: toast.POSITION.TOP_LEFT,
+      		autoClose: 3000,
       		className: 'toast-message'
     	});
-    	toast.info('New item found in cart!');
+    	toast.info('New item found in cart!', {
+    		position: toast.POSITION.TOP_LEFT
+    	});
 	}
 
 	return(

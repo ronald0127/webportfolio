@@ -72,7 +72,7 @@ export default function Orders() {
 					<td>{product.price}</td>
 					<td>{product.quantity}</td>
 					<td>{product.subTotal}</td>
-					<td className="text-info">Delivered</td>
+					<td style={{color: "#03fc39"}}>Delivered</td>
 				</tr>
 			);
 		});

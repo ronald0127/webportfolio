@@ -1,0 +1,2 @@
+email: admin@mail.com
+pass: asdasda

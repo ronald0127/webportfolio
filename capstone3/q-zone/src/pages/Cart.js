@@ -13,6 +13,10 @@ export default function Cart() {
 
 	const [cartItems, setCartItems] = useState([]);
 	const [orderItems, setOrderItems] = useState([]);
+	const [deleteItemList, setDeleteItemList] = useState([]);
+	const [itemToDelete, setItemToDelete] = useState('');
+	const [deleteFlag, setDeleteFlag] = useState(false);
+
 	const [total, setTotal] = useState('');
 	const [isCheckOutItems, setIsCheckOutItems] = useState(false);
 
@@ -44,6 +48,7 @@ export default function Cart() {
 			if (data) {
 				setCartItems([]);
 				setOrderItems([]);
+				setDeleteItemList([]);
 				setTotal('');
 				let total = 0;
 				data.forEach(product => {
@@ -64,6 +69,7 @@ export default function Cart() {
 							</tr>
 						);
 						setCartItems(oldArray => [...oldArray, tableItem]);
+
 						const orderedProduct = {
 							'productId': product._id,
 							'quantity': itemArr[1],
@@ -71,6 +77,11 @@ export default function Cart() {
 							'subTotal': subTotal
 						}
 						setOrderItems(oldArray => [...oldArray, orderedProduct]);
+
+						const deleteOptions = <option value={product._id}>{product.name}</option>;
+						setDeleteItemList(oldArray => [...oldArray, deleteOptions]);
+
+						setItemToDelete(product._id);
 					}
 				});
 				total = (Math.round(total * 100) / 100).toFixed(2);
@@ -85,7 +96,7 @@ export default function Cart() {
 				setTotal(total);
 			}
 		}).catch(error => console.log(error));
-	}, []);
+	}, [deleteFlag]);
 
 	useEffect(() => {
 		if (cardNum === '' || cardName === ''
@@ -123,7 +134,7 @@ export default function Cart() {
 				orderItems.forEach(item => {
 					localStorage.removeItem(item.productId);
 				});
-				// navigate(`/products/${index}`);
+				navigate('/orders');
 			}
 			else {
 				Swal2.fire({
@@ -135,6 +146,21 @@ export default function Cart() {
 				});
 			}
 		}).catch(error => console.log(error));
+	}
+
+	function deleteItemInCart() {
+		// console.log(itemToDelete);
+		// console.log(deleteItemList);
+		if (itemToDelete != null && itemToDelete != '') {
+			localStorage.removeItem(itemToDelete);
+			setDeleteFlag(true);
+		}
+	}
+
+	function checkOut() {
+		if (total != 0 && total != '0') {
+			setIsCheckOutItems(true);
+		}
 	}
 
 	return(
@@ -156,8 +182,15 @@ export default function Cart() {
 					{cartItems}
 				</tbody>
 			</Table>
-			<h4 className="mt-5 mb-3">Orders Total Amount: <a className="text-info">{total}</a></h4>
-			<Button className="bg-success fw-bold p-3 my-3" onClick={() => setIsCheckOutItems(true)}>
+			<h4 className="my-5">Orders Total Amount: <a className="text-info">{total}</a></h4>
+			<p>Select an Item you want to delete:</p>
+			<select className="fw-bold border border-5 border-danger d-block my-3 col-3"
+				onChange={event => setItemToDelete(event.target.value)}>
+					<option defaultValue disabled className="fw-bold">Select Item to Delete</option>
+					{deleteItemList}
+			</select>
+			<Button className="bg-danger fw-bold px-5 mb-3 d-block" onClick={() => deleteItemInCart()}>Delete</Button>
+			<Button className="bg-success fw-bold p-3 mb-3 mt-5" onClick={() => checkOut()}>
 				Checkout Items
 			</Button>
 			{
