@@ -13,9 +13,6 @@ export default function Cart() {
 
 	const [cartItems, setCartItems] = useState([]);
 	const [orderItems, setOrderItems] = useState([]);
-	const [deleteItemList, setDeleteItemList] = useState([]);
-	const [itemToDelete, setItemToDelete] = useState('');
-	const [deleteFlag, setDeleteFlag] = useState(false);
 
 	const [total, setTotal] = useState('');
 	const [isCheckOutItems, setIsCheckOutItems] = useState(false);
@@ -48,7 +45,6 @@ export default function Cart() {
 			if (data) {
 				setCartItems([]);
 				setOrderItems([]);
-				setDeleteItemList([]);
 				setTotal('');
 				let total = 0;
 				data.forEach(product => {
@@ -66,6 +62,11 @@ export default function Cart() {
 								<td>{product.price}</td>
 								<td>{itemArr[1]}</td>
 								<td>{(Math.round(subTotal * 100) / 100).toFixed(2)}</td>
+								<td>
+									<Button className="bg-danger ms-5 px-3" onClick={() => deleteItemInCart(product._id)}>
+										Remove
+									</Button>
+								</td>
 							</tr>
 						);
 						setCartItems(oldArray => [...oldArray, tableItem]);
@@ -77,11 +78,6 @@ export default function Cart() {
 							'subTotal': subTotal
 						}
 						setOrderItems(oldArray => [...oldArray, orderedProduct]);
-
-						const deleteOptions = <option value={product._id}>{product.name}</option>;
-						setDeleteItemList(oldArray => [...oldArray, deleteOptions]);
-
-						setItemToDelete(product._id);
 					}
 				});
 				total = (Math.round(total * 100) / 100).toFixed(2);
@@ -96,7 +92,7 @@ export default function Cart() {
 				setTotal(total);
 			}
 		}).catch(error => console.log(error));
-	}, [deleteFlag]);
+	}, [total]);
 
 	useEffect(() => {
 		if (cardNum === '' || cardName === ''
@@ -148,17 +144,14 @@ export default function Cart() {
 		}).catch(error => console.log(error));
 	}
 
-	function deleteItemInCart() {
-		// console.log(itemToDelete);
-		// console.log(deleteItemList);
-		if (itemToDelete != null && itemToDelete != '') {
-			localStorage.removeItem(itemToDelete);
-			setDeleteFlag(true);
-		}
+	function deleteItemInCart(deleteItem) {
+		localStorage.removeItem(deleteItem);
+		setIsCheckOutItems(false);
+		setTotal('');
 	}
 
 	function checkOut() {
-		if (total != 0 && total != '0') {
+		if (total != 0 && total != '0' && total != '') {
 			setIsCheckOutItems(true);
 		}
 	}
@@ -176,6 +169,7 @@ export default function Cart() {
 						<th className="text-warning">Orig. Price</th>
 						<th className="text-warning">Quantity</th>
 						<th className="text-warning">Sub-Total</th>
+						<th className="text-warning">Remove Item</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -183,15 +177,8 @@ export default function Cart() {
 				</tbody>
 			</Table>
 			<h4 className="my-5">Orders Total Amount: <a className="text-info">{total}</a></h4>
-			<p>Select an Item you want to delete:</p>
-			<select className="fw-bold border border-5 border-danger d-block my-3 col-3"
-				onChange={event => setItemToDelete(event.target.value)}>
-					<option defaultValue disabled className="fw-bold">Select Item to Delete</option>
-					{deleteItemList}
-			</select>
-			<Button className="bg-danger fw-bold px-5 mb-3 d-block" onClick={() => deleteItemInCart()}>Delete</Button>
-			<Button className="bg-success fw-bold p-3 mb-3 mt-5" onClick={() => checkOut()}>
-				Checkout Items
+			<Button className="bg-success fw-bold p-3 my-5" onClick={() => checkOut()}>
+				Checkout
 			</Button>
 			{
 				isCheckOutItems ?
@@ -233,11 +220,11 @@ export default function Cart() {
 					        placeholder="Enter CVV code at the back of your card." 
 					        maxLength={5} />
 					</Form.Group>
-					<Button className="my-4 p-4 fw-bolder bg-success" disabled={isDisabled}
+					<Button className="my-4 p-3 fw-bolder bg-success" disabled={isDisabled}
 						onClick={() => order()}>
 							Submit Order
 					</Button>
-					<p className="mb-4"><i>Note: Please review your order carefully before submitting.</i></p>
+					<p className="mb-5"><i>*Note: Please review your order carefully before submitting.</i></p>
 				</form>
 				:
 				<></>

@@ -80,8 +80,8 @@ export default function Orders() {
 	}
 
 	return(
-		<Container className="text-light">
-			<h1 className="text-center text-info my-5">Order History</h1>
+		<Container className="text-light my-5">
+			<h1 className="text-center text-info mb-4">Order History</h1>
 			{orders}
 		</Container>
 	);

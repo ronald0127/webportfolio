@@ -16,12 +16,12 @@ export default function SideBar() {
 		return (
 			user.isAdmin == 'false' || user.isAdmin == false ?
 			<Menu>
-				<Link className="menu-item" to="/profile">
+				{/*<Link className="menu-item" to="/profile">
 					My Profile
 				</Link>
 				<Link className="menu-item" to="/watchlist">
 					My Watchlist
-				</Link>
+				</Link>*/}
 				<Link className="menu-item notification-icon" to="/cart">
 					Cart
 					<FaBell className="ms-2 bg-danger"/>
