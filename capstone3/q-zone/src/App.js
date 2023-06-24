@@ -28,6 +28,7 @@ import Games from './pages/Games.js';
 import ProductView from './pages/ProductView.js';
 import Cart from './pages/Cart.js';
 import Orders from './pages/Orders.js';
+import Search from './pages/Search.js';
 
 
 function App() {
@@ -67,6 +68,7 @@ function App() {
           <Route path='/orders'                       element={<Orders/>}         />
           <Route path='/'                             element={<Home/>}           />
           <Route path='*'                             element={<NotFound/>}       />
+          <Route path='/search/:index/:prodId'        element={<Search/>}         />
         </Routes>
         <Footer />
       </BrowserRouter>
