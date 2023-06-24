@@ -58,7 +58,7 @@ export default function Series() {
 	}
 
 	return(
-		<Container className="text-light">
+		<Container className="text-light min-vh-100">
 			<h1 className="my-5 text-center">Watch Series Here</h1>
 			<Row className="mt-5">
 				{series.length > Number(index) ? series[Number(index)] : <></>}

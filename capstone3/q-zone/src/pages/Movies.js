@@ -58,7 +58,7 @@ export default function Movies() {
 	}
 
 	return(
-		<Container className="text-light">
+		<Container className="text-light min-vh-100">
 			<h1 className="my-5 text-center">Watch Movies Here</h1>
 			<Row className="mt-5">
 				{movies.length > Number(index) ? movies[Number(index)] : <></>}

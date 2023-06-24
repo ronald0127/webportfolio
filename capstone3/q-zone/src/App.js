@@ -11,7 +11,9 @@ import {UserProvider} from './AppContext.js';
 import {BrowserRouter, Routes, Route, Redirect} from 'react-router-dom';
 
 import AppNavBar from './components/AppNavBar.js';
+import SearchBar from './components/SearchBar.js';
 import SideBar from './components/SideBar.js';
+import Footer from './components/Footer.js';
 import NotFound from './pages/NotFound.js';
 import Logout from './pages/Logout.js';
 import Login from './pages/Login.js';
@@ -49,6 +51,7 @@ function App() {
         <SideBar pageWrapId={'page-wrap'} outerContainerId={'outer-container'} />
         <ToastContainer />
         <AppNavBar />
+        <SearchBar />
         <Routes>
           <Route path='/login'                        element={<Login/>}          />
           <Route path='/logout'                       element={<Logout/>}         />
@@ -65,6 +68,7 @@ function App() {
           <Route path='/'                             element={<Home/>}           />
           <Route path='*'                             element={<NotFound/>}       />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </UserProvider>
   );

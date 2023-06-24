@@ -38,7 +38,7 @@ export default function Register() {
 		if (email === '' || password1 === '' || password2 === '' 
 			|| password1.length < 7 || (password1 != password2)
 			|| firstName === '' || lastName === '' || number === ''
-			|| number.length != 11) {
+			|| number.length < 11) {
 			setIsDisabled(true);
 		}
 		else {
@@ -131,7 +131,7 @@ export default function Register() {
 	}
 
 	return(
-		<Container>
+		<Container className="min-vh-100">
 			<Row>
 				<Col className="col-12 col-md-6 mx-auto mb-4 text-light">
 					<h1 className="my-5 text-center text-info">Register</h1>
@@ -181,7 +181,7 @@ export default function Register() {
 					    <p className="mt-5">Have an account already? <Link to='/login'>Login here.</Link></p>
 
 					    <Button variant="primary" type="submit" disabled={isDisabled} 
-					    	className="my-4 px-4 bg-info text-dark">
+					    	className="my-5 px-4 bg-info text-dark">
 					    		Submit
 					    </Button>
 					</Form>

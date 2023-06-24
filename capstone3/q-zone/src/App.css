@@ -16,6 +16,10 @@
   padding: 50px 20px;
 }
 
+.footer-bottom {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
 
 /* ---------- Burger Menu Styles (START) ---------- */
 /* Position and sizing of burger button */
@@ -118,6 +122,7 @@
   position: absolute;
 }
 /* ---------- Youtube Embed CSS (END) ---------- */
+
 
 /* ---------- Visa and MasterCard Selector (START) ---------- */
 .cc-selector input{

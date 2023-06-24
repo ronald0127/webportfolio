@@ -77,7 +77,7 @@ export default function ProductView() {
 	}
 
 	return(
-		<Container>
+		<Container className="min-vh-100">
 			<Row>
 				<Col className="col-12 mb-5">
 					<h1 className="text-center text-info my-5">{name}</h1>

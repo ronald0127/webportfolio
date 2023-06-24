@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 export default function NotFound() {
 
 	return(
-		<Container>
+		<Container className="min-vh-100">
 			<Row>
 				<Col className="text-center text-light mt-5">
 					<h1 className="my-3">Page Not Found!</h1>

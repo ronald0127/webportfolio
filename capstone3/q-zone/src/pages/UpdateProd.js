@@ -97,7 +97,7 @@ export default function UpdateProduct() {
 	}
 
 	return(
-		<Container>
+		<Container className="min-vh-100">
 			<Row>
 				<Col className="col-12 col-md-6 mx-auto mb-4 text-light">
 					<h1 className="my-5 text-center text-info">Update Product</h1>

@@ -93,7 +93,7 @@ export default function Login() {
 
 	return(
 		user.id === null ?
-		<Container>
+		<Container className="min-vh-100">
 			<Row>
 				<Col className="col-12 col-md-4 mx-auto text-light">
 					<h1 className="my-5 text-center text-info">Login</h1>

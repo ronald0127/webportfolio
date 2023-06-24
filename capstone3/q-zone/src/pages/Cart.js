@@ -157,7 +157,7 @@ export default function Cart() {
 	}
 
 	return(
-		<Container className="text-light">
+		<Container className="min-vh-100 text-light">
 			<h1 className="text-center text-info my-5">Items for Checkout</h1>
 			<Table striped bordered hover variant="dark">
 				<thead>

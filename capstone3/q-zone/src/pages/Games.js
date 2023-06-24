@@ -58,7 +58,7 @@ export default function Games() {
 	}
 
 	return(
-		<Container className="text-light">
+		<Container className="text-light min-vh-100">
 			<h1 className="my-5 text-center">See all of our Games here!</h1>
 			<p className="my-5 text-center">
 				<i>** Please note that we are only selling physical copies for all of our games.</i>

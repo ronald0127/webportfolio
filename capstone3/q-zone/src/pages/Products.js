@@ -92,8 +92,8 @@ export default function Products() {
 	}
 
 	return(
-		<Container>
-			<Row className="my-5 text-light">
+		<Container className="min-vh-100">
+			<Row className="my-3 text-light">
 				<h1 className="text-center my-3 text-info">Products</h1>
 				<InputGroup className="mb-4 mt-3">
 					<InputGroup.Text id="inputGroup-sizing-default" className="bg-dark text-light">
@@ -115,7 +115,7 @@ export default function Products() {
 				{products.length > (Number(index) + 2) ? products[Number(index) + 2] : <></>}
 				{products.length > (Number(index) + 3) ? products[Number(index) + 3] : <></>}
 				{products.length > (Number(index) + 4) ? products[Number(index) + 4] : <></>}
-				<div className="d-flex justify-content-end">
+				<div className="d-flex justify-content-end mb-5">
 					<PreviousLink />
 					<NextLink />
 				</div>

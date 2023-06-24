@@ -52,7 +52,7 @@ export default function Home() {
 	}, []);
 
 	return(
-		<Container className="text-light">
+		<Container className="text-light min-vh-100">
 			<Row className="mt-5">
 				<h1 className="mb-4 text-center">Latest Movies</h1>
 				{movies}
