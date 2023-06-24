@@ -71,7 +71,9 @@ export default function SearchBar() {
 			}
 
 			prodId = prodId === '' ? 'notFound' : prodId;
-			navigate(`/search/${searchIndex}/${prodId}`);
+			if (searchIndex >= 0) {
+				navigate(`/search/${searchIndex}/${prodId}`);
+			}
 		}
 	}
 
