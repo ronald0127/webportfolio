@@ -30,11 +30,20 @@ export default function Search() {
 		}).catch(error => console.log(error));
 	}, [index, prodId]);
 
+	function SearchFoundorNot() {
+		return(
+			index == -1 && prodId == 'notFound' ?
+			<h3 className="my-5 text-center">Item not Found!</h3>
+			:
+			<>{searchedProdCard}</>
+		);
+	}
+
 	return(
 		<Container className="text-light min-vh-100">
 			<h1 className="my-5 text-center">Search Result</h1>
 			<Row className="mt-5">
-				{searchedProdCard}
+				<SearchFoundorNot />
 			</Row>
 		</Container>
 	);

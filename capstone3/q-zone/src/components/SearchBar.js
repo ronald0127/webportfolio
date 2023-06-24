@@ -70,6 +70,7 @@ export default function SearchBar() {
 				}
 			}
 
+			prodId = prodId === '' ? 'notFound' : prodId;
 			navigate(`/search/${searchIndex}/${prodId}`);
 		}
 	}
