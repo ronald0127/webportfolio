@@ -105,8 +105,6 @@ export default function Cart() {
 	}, [cardNum, cardName, cardExp, cardCvv]);
 
 	function order() {
-		// console.log(total);
-		// console.log(orderItems);
 		fetch(`${process.env.REACT_APP_API_URL}/orders/checkout`, {
 			method: 'POST',
 			headers: {

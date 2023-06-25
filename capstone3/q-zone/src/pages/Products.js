@@ -43,7 +43,7 @@ export default function Products() {
 				}));
 				setProductsData(data.map(product => {
 					return(
-						<option value={product._id}>{product.name}</option>
+						<option key={product._id} value={product._id}>{product.name}</option>
 					);
 				}));
 			}

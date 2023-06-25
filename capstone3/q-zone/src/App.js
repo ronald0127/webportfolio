@@ -29,6 +29,7 @@ import ProductView from './pages/ProductView.js';
 import Cart from './pages/Cart.js';
 import Orders from './pages/Orders.js';
 import Search from './pages/Search.js';
+import SetUserAsAdmin from './pages/SetUserAsAdmin.js';
 
 
 function App() {
@@ -69,6 +70,7 @@ function App() {
           <Route path='/'                             element={<Home/>}           />
           <Route path='*'                             element={<NotFound/>}       />
           <Route path='/search/:index/:prodId'        element={<Search/>}         />
+          <Route path='/setAdmin'               element={<SetUserAsAdmin/>} />
         </Routes>
         <Footer />
       </BrowserRouter>
