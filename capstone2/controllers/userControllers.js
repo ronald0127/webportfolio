@@ -128,3 +128,20 @@ module.exports.setUserAsAdmin = (request, response) => {
 		return response.send(false);
 	}
 }
+
+module.exports.getAllUsers = (request, response) => {
+	const userData = auth.decode(request.headers.authorization);
+	if (userData.isAdmin) {
+		User.find({}).then(result => {
+			if (result.length > 0) {
+				return response.send(result);
+			}
+			else {
+				return response.send(false);
+			}
+		}).catch(error => response.send(false));
+	}
+	else {
+		return response.send(false);
+	}
+}
