@@ -129,6 +129,26 @@ module.exports.setUserAsAdmin = (request, response) => {
 	}
 }
 
+module.exports.setAdminAsUser = (request, response) => {
+	const userData = auth.decode(request.headers.authorization);
+	const email = request.body.email;
+
+	if (userData.isAdmin) {
+		User.findOneAndUpdate({email: email}, {isAdmin: false})
+		.then(result => {
+			if (result) {
+				return response.send(true);
+			}
+			else {
+				return response.send(false);
+			}
+		}).catch(error => response.send(false));
+	}
+	else {
+		return response.send(false);
+	}
+}
+
 module.exports.getAllUsers = (request, response) => {
 	const userData = auth.decode(request.headers.authorization);
 	if (userData.isAdmin) {
